@@ -23,8 +23,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-//@EnableJpaRepositories(basePackages = {"lt.pap.dao"})
-//@ComponentScan(basePackages = {"lt.pap.dao", "lt.pap.service", "lt.pap.bean"})
+@EnableJpaRepositories(basePackages = {"lt.pap.dao"})
+@ComponentScan(basePackages = {"lt.pap.dao", "lt.pap.service", "lt.pap.bean"})
 @PropertySource("classpath:application.properties")
 public class InitConfig {
 
@@ -44,22 +44,22 @@ public class InitConfig {
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NamingException {
     HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-    hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
+    hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
 
     Properties properties = new Properties();
 
     properties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
     properties.put("hibernate.show_sql", environment.getProperty("hibernate.showSQL"));
     properties.put("hibernate.format_sql", environment.getProperty("hibernate.formatSQL"));
-    properties.put("hibernate.hbm2ddl.auto", "create");
+//    properties.put("hibernate.hbm2ddl.auto", "create");
 
-    properties.put("javax.persistence.schema-generation.scripts.action", "create");
-    properties.put("javax.persistence.schema-generation.create-source", "metadata");
-    properties.put("javax.persistence.schema-generation.scripts.create-target", "sql/generated/create-schema.sql");
+//    properties.put("javax.persistence.schema-generation.scripts.action", "create");
+//    properties.put("javax.persistence.schema-generation.create-source", "metadata");
+//    properties.put("javax.persistence.schema-generation.scripts.create-target", "sql/generated/create-schema.sql");
 
     LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
     entityManagerFactoryBean.setDataSource(dataSource());
-//    entityManagerFactoryBean.setPackagesToScan("lt.pap.model");
+    entityManagerFactoryBean.setPackagesToScan("lt.pap.model");
     entityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
     entityManagerFactoryBean.setJpaProperties(properties);
 
