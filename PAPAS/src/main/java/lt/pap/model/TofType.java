@@ -89,25 +89,25 @@ public class TofType implements Serializable {
 	@Column(name="TYP_VALVES")
 	private short typValves;
 
-	//bi-directional many-to-one association to TofCountryDesignation
-	@OneToMany(mappedBy="tofType1")
-	private List<TofCountryDesignation> tofCountryDesignations1;
+//	//bi-directional many-to-one association to TofCountryDesignation
+//	@OneToMany(mappedBy="tofType1")
+//	private List<TofCountryDesignation> tofCountryDesignations1;
+//
+//	//bi-directional many-to-one association to TofCountryDesignation
+//	@OneToMany(mappedBy="tofType2")
+//	private List<TofCountryDesignation> tofCountryDesignations2;
 
-	//bi-directional many-to-one association to TofCountryDesignation
-	@OneToMany(mappedBy="tofType2")
-	private List<TofCountryDesignation> tofCountryDesignations2;
-
-	//bi-directional many-to-one association to TofDesignation
-	@OneToMany(mappedBy="tofType1")
-	private List<TofDesignation> tofDesignations1;
-
-	//bi-directional many-to-one association to TofDesignation
-	@OneToMany(mappedBy="tofType2")
-	private List<TofDesignation> tofDesignations2;
-
-	//bi-directional many-to-one association to TofDesignation
-	@OneToMany(mappedBy="tofType3")
-	private List<TofDesignation> tofDesignations3;
+//	//bi-directional many-to-one association to TofDesignation
+//	@OneToMany(mappedBy="tofType1")
+//	private List<TofDesignation> tofDesignations1;
+//
+//	//bi-directional many-to-one association to TofDesignation
+//	@OneToMany(mappedBy="tofType2")
+//	private List<TofDesignation> tofDesignations2;
+//
+//	//bi-directional many-to-one association to TofDesignation
+//	@OneToMany(mappedBy="tofType3")
+//	private List<TofDesignation> tofDesignations3;
 
 	//bi-directional many-to-one association to TofModel
 	@ManyToOne
@@ -309,115 +309,115 @@ public class TofType implements Serializable {
 		this.typValves = typValves;
 	}
 
-	public List<TofCountryDesignation> getTofCountryDesignations1() {
-		return this.tofCountryDesignations1;
-	}
-
-	public void setTofCountryDesignations1(List<TofCountryDesignation> tofCountryDesignations1) {
-		this.tofCountryDesignations1 = tofCountryDesignations1;
-	}
-
-	public TofCountryDesignation addTofCountryDesignations1(TofCountryDesignation tofCountryDesignations1) {
-		getTofCountryDesignations1().add(tofCountryDesignations1);
-		tofCountryDesignations1.setTofType1(this);
-
-		return tofCountryDesignations1;
-	}
-
-	public TofCountryDesignation removeTofCountryDesignations1(TofCountryDesignation tofCountryDesignations1) {
-		getTofCountryDesignations1().remove(tofCountryDesignations1);
-		tofCountryDesignations1.setTofType1(null);
-
-		return tofCountryDesignations1;
-	}
-
-	public List<TofCountryDesignation> getTofCountryDesignations2() {
-		return this.tofCountryDesignations2;
-	}
-
-	public void setTofCountryDesignations2(List<TofCountryDesignation> tofCountryDesignations2) {
-		this.tofCountryDesignations2 = tofCountryDesignations2;
-	}
-
-	public TofCountryDesignation addTofCountryDesignations2(TofCountryDesignation tofCountryDesignations2) {
-		getTofCountryDesignations2().add(tofCountryDesignations2);
-		tofCountryDesignations2.setTofType2(this);
-
-		return tofCountryDesignations2;
-	}
-
-	public TofCountryDesignation removeTofCountryDesignations2(TofCountryDesignation tofCountryDesignations2) {
-		getTofCountryDesignations2().remove(tofCountryDesignations2);
-		tofCountryDesignations2.setTofType2(null);
-
-		return tofCountryDesignations2;
-	}
-
-	public List<TofDesignation> getTofDesignations1() {
-		return this.tofDesignations1;
-	}
-
-	public void setTofDesignations1(List<TofDesignation> tofDesignations1) {
-		this.tofDesignations1 = tofDesignations1;
-	}
-
-	public TofDesignation addTofDesignations1(TofDesignation tofDesignations1) {
-		getTofDesignations1().add(tofDesignations1);
-		tofDesignations1.setTofType1(this);
-
-		return tofDesignations1;
-	}
-
-	public TofDesignation removeTofDesignations1(TofDesignation tofDesignations1) {
-		getTofDesignations1().remove(tofDesignations1);
-		tofDesignations1.setTofType1(null);
-
-		return tofDesignations1;
-	}
-
-	public List<TofDesignation> getTofDesignations2() {
-		return this.tofDesignations2;
-	}
-
-	public void setTofDesignations2(List<TofDesignation> tofDesignations2) {
-		this.tofDesignations2 = tofDesignations2;
-	}
-
-	public TofDesignation addTofDesignations2(TofDesignation tofDesignations2) {
-		getTofDesignations2().add(tofDesignations2);
-		tofDesignations2.setTofType2(this);
-
-		return tofDesignations2;
-	}
-
-	public TofDesignation removeTofDesignations2(TofDesignation tofDesignations2) {
-		getTofDesignations2().remove(tofDesignations2);
-		tofDesignations2.setTofType2(null);
-
-		return tofDesignations2;
-	}
-
-	public List<TofDesignation> getTofDesignations3() {
-		return this.tofDesignations3;
-	}
-
-	public void setTofDesignations3(List<TofDesignation> tofDesignations3) {
-		this.tofDesignations3 = tofDesignations3;
-	}
-
-	public TofDesignation addTofDesignations3(TofDesignation tofDesignations3) {
-		getTofDesignations3().add(tofDesignations3);
-		tofDesignations3.setTofType3(this);
-
-		return tofDesignations3;
-	}
-
-	public TofDesignation removeTofDesignations3(TofDesignation tofDesignations3) {
-		getTofDesignations3().remove(tofDesignations3);
-		tofDesignations3.setTofType3(null);
-
-		return tofDesignations3;
-	}
+//	public List<TofCountryDesignation> getTofCountryDesignations1() {
+//		return this.tofCountryDesignations1;
+//	}
+//
+//	public void setTofCountryDesignations1(List<TofCountryDesignation> tofCountryDesignations1) {
+//		this.tofCountryDesignations1 = tofCountryDesignations1;
+//	}
+//
+//	public TofCountryDesignation addTofCountryDesignations1(TofCountryDesignation tofCountryDesignations1) {
+//		getTofCountryDesignations1().add(tofCountryDesignations1);
+//		tofCountryDesignations1.setTofType1(this);
+//
+//		return tofCountryDesignations1;
+//	}
+//
+//	public TofCountryDesignation removeTofCountryDesignations1(TofCountryDesignation tofCountryDesignations1) {
+//		getTofCountryDesignations1().remove(tofCountryDesignations1);
+//		tofCountryDesignations1.setTofType1(null);
+//
+//		return tofCountryDesignations1;
+//	}
+//
+//	public List<TofCountryDesignation> getTofCountryDesignations2() {
+//		return this.tofCountryDesignations2;
+//	}
+//
+//	public void setTofCountryDesignations2(List<TofCountryDesignation> tofCountryDesignations2) {
+//		this.tofCountryDesignations2 = tofCountryDesignations2;
+//	}
+//
+//	public TofCountryDesignation addTofCountryDesignations2(TofCountryDesignation tofCountryDesignations2) {
+//		getTofCountryDesignations2().add(tofCountryDesignations2);
+//		tofCountryDesignations2.setTofType2(this);
+//
+//		return tofCountryDesignations2;
+//	}
+//
+//	public TofCountryDesignation removeTofCountryDesignations2(TofCountryDesignation tofCountryDesignations2) {
+//		getTofCountryDesignations2().remove(tofCountryDesignations2);
+//		tofCountryDesignations2.setTofType2(null);
+//
+//		return tofCountryDesignations2;
+//	}
+//
+//	public List<TofDesignation> getTofDesignations1() {
+//		return this.tofDesignations1;
+//	}
+//
+//	public void setTofDesignations1(List<TofDesignation> tofDesignations1) {
+//		this.tofDesignations1 = tofDesignations1;
+//	}
+//
+//	public TofDesignation addTofDesignations1(TofDesignation tofDesignations1) {
+//		getTofDesignations1().add(tofDesignations1);
+//		tofDesignations1.setTofType1(this);
+//
+//		return tofDesignations1;
+//	}
+//
+//	public TofDesignation removeTofDesignations1(TofDesignation tofDesignations1) {
+//		getTofDesignations1().remove(tofDesignations1);
+//		tofDesignations1.setTofType1(null);
+//
+//		return tofDesignations1;
+//	}
+//
+//	public List<TofDesignation> getTofDesignations2() {
+//		return this.tofDesignations2;
+//	}
+//
+//	public void setTofDesignations2(List<TofDesignation> tofDesignations2) {
+//		this.tofDesignations2 = tofDesignations2;
+//	}
+//
+//	public TofDesignation addTofDesignations2(TofDesignation tofDesignations2) {
+//		getTofDesignations2().add(tofDesignations2);
+//		tofDesignations2.setTofType2(this);
+//
+//		return tofDesignations2;
+//	}
+//
+//	public TofDesignation removeTofDesignations2(TofDesignation tofDesignations2) {
+//		getTofDesignations2().remove(tofDesignations2);
+//		tofDesignations2.setTofType2(null);
+//
+//		return tofDesignations2;
+//	}
+//
+//	public List<TofDesignation> getTofDesignations3() {
+//		return this.tofDesignations3;
+//	}
+//
+//	public void setTofDesignations3(List<TofDesignation> tofDesignations3) {
+//		this.tofDesignations3 = tofDesignations3;
+//	}
+//
+//	public TofDesignation addTofDesignations3(TofDesignation tofDesignations3) {
+//		getTofDesignations3().add(tofDesignations3);
+//		tofDesignations3.setTofType3(this);
+//
+//		return tofDesignations3;
+//	}
+//
+//	public TofDesignation removeTofDesignations3(TofDesignation tofDesignations3) {
+//		getTofDesignations3().remove(tofDesignations3);
+//		tofDesignations3.setTofType3(null);
+//
+//		return tofDesignations3;
+//	}
 
 	public TofModel getTofModel() {
 		return this.tofModel;

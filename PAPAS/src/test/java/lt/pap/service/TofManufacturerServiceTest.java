@@ -3,6 +3,12 @@ package lt.pap.service;
 import static org.junit.Assert.fail;
 import init.InitConfig;
 
+import java.util.List;
+import java.util.Set;
+
+import lt.pap.model.TofDesignation;
+import lt.pap.model.TofEngine;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +24,12 @@ public class TofManufacturerServiceTest {
 
 	@Test
 	public void testFindAll() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testFindOne() {
+		List<TofEngine> e = tofEngineService.findAll();
+		Set<TofDesignation> l = e.get(0).getKvEngineTranslations();
+		for(TofDesignation d : l) {
+			System.out.println(d);
+		}
+		System.out.println(e.size());
 		fail("Not yet implemented");
 	}
 

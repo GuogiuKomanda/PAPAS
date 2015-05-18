@@ -32,9 +32,9 @@ public class TofLanguage implements Serializable {
 	@OneToMany(mappedBy="tofLanguage")
 	private List<TofCountryDesignation> tofCountryDesignations;
 
-	//bi-directional many-to-one association to TofDesignation
-	@OneToMany(mappedBy="tofLanguage")
-	private List<TofDesignation> tofDesignations;
+//	//bi-directional many-to-one association to TofDesignation
+//	@OneToMany(mappedBy="tofLanguage")
+//	private List<TofDesignation> tofDesignations;
 
 	public TofLanguage() {
 	}
@@ -92,27 +92,27 @@ public class TofLanguage implements Serializable {
 
 		return tofCountryDesignation;
 	}
-
-	public List<TofDesignation> getTofDesignations() {
-		return this.tofDesignations;
-	}
-
-	public void setTofDesignations(List<TofDesignation> tofDesignations) {
-		this.tofDesignations = tofDesignations;
-	}
-
-	public TofDesignation addTofDesignation(TofDesignation tofDesignation) {
-		getTofDesignations().add(tofDesignation);
-		tofDesignation.setTofLanguage(this);
-
-		return tofDesignation;
-	}
-
-	public TofDesignation removeTofDesignation(TofDesignation tofDesignation) {
-		getTofDesignations().remove(tofDesignation);
-		tofDesignation.setTofLanguage(null);
-
-		return tofDesignation;
-	}
+//
+//	public List<TofDesignation> getTofDesignations() {
+//		return this.tofDesignations;
+//	}
+//
+//	public void setTofDesignations(List<TofDesignation> tofDesignations) {
+//		this.tofDesignations = tofDesignations;
+//	}
+//
+//	public TofDesignation addTofDesignation(TofDesignation tofDesignation) {
+//		getTofDesignations().add(tofDesignation);
+//		tofDesignation.setTofLanguage(this);
+//
+//		return tofDesignation;
+//	}
+//
+//	public TofDesignation removeTofDesignation(TofDesignation tofDesignation) {
+//		getTofDesignations().remove(tofDesignation);
+//		tofDesignation.setTofLanguage(null);
+//
+//		return tofDesignation;
+//	}
 
 }

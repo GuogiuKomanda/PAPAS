@@ -24,23 +24,23 @@ public class TofCountryDesignation implements Serializable {
 
 	//bi-directional many-to-one association to TofLanguage
 	@ManyToOne
-	@JoinColumn(name="CDS_LNG_ID")
+	@JoinColumn(name="CDS_LNG_ID", insertable=false, updatable=false)
 	private TofLanguage tofLanguage;
 
-	//bi-directional many-to-one association to TofModel
-	@ManyToOne
-	@JoinColumn(name="CDS_ID", referencedColumnName="MOD_CDS_ID")
-	private TofModel tofModel;
-
-	//bi-directional many-to-one association to TofType
-	@ManyToOne
-	@JoinColumn(name="CDS_ID", referencedColumnName="TYP_MMT_CDS_ID")
-	private TofType tofType1;
-
-	//bi-directional many-to-one association to TofType
-	@ManyToOne
-	@JoinColumn(name="CDS_ID", referencedColumnName="TYP_CDS_ID")
-	private TofType tofType2;
+//	//bi-directional many-to-one association to TofModel
+//	@ManyToOne
+//	@JoinColumn(name="CDS_ID", referencedColumnName="MOD_CDS_ID")
+//	private TofModel tofModel;
+//
+//	//bi-directional many-to-one association to TofType
+//	@ManyToOne
+//	@JoinColumn(name="CDS_ID", referencedColumnName="TYP_MMT_CDS_ID")
+//	private TofType tofType1;
+//
+//	//bi-directional many-to-one association to TofType
+//	@ManyToOne
+//	@JoinColumn(name="CDS_ID", referencedColumnName="TYP_CDS_ID")
+//	private TofType tofType2;
 
 	public TofCountryDesignation() {
 	}
@@ -68,29 +68,29 @@ public class TofCountryDesignation implements Serializable {
 	public void setTofLanguage(TofLanguage tofLanguage) {
 		this.tofLanguage = tofLanguage;
 	}
-
-	public TofModel getTofModel() {
-		return this.tofModel;
-	}
-
-	public void setTofModel(TofModel tofModel) {
-		this.tofModel = tofModel;
-	}
-
-	public TofType getTofType1() {
-		return this.tofType1;
-	}
-
-	public void setTofType1(TofType tofType1) {
-		this.tofType1 = tofType1;
-	}
-
-	public TofType getTofType2() {
-		return this.tofType2;
-	}
-
-	public void setTofType2(TofType tofType2) {
-		this.tofType2 = tofType2;
-	}
+//
+//	public TofModel getTofModel() {
+//		return this.tofModel;
+//	}
+//
+//	public void setTofModel(TofModel tofModel) {
+//		this.tofModel = tofModel;
+//	}
+//
+//	public TofType getTofType1() {
+//		return this.tofType1;
+//	}
+//
+//	public void setTofType1(TofType tofType1) {
+//		this.tofType1 = tofType1;
+//	}
+//
+//	public TofType getTofType2() {
+//		return this.tofType2;
+//	}
+//
+//	public void setTofType2(TofType tofType2) {
+//		this.tofType2 = tofType2;
+//	}
 
 }

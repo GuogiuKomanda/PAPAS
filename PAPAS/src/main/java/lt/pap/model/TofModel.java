@@ -39,10 +39,10 @@ public class TofModel implements Serializable {
 
 	@Column(name="MOD_PCON_START")
 	private int modPconStart;
-
-	//bi-directional many-to-one association to TofCountryDesignation
-	@OneToMany(mappedBy="tofModel")
-	private List<TofCountryDesignation> tofCountryDesignations;
+//
+//	//bi-directional many-to-one association to TofCountryDesignation
+//	@OneToMany(mappedBy="tofModel")
+//	private List<TofCountryDesignation> tofCountryDesignations;
 
 	//bi-directional many-to-one association to TofManufacturer
 	@ManyToOne
@@ -119,28 +119,28 @@ public class TofModel implements Serializable {
 	public void setModPconStart(int modPconStart) {
 		this.modPconStart = modPconStart;
 	}
+//
+//	public List<TofCountryDesignation> getTofCountryDesignations() {
+//		return this.tofCountryDesignations;
+//	}
+//
+//	public void setTofCountryDesignations(List<TofCountryDesignation> tofCountryDesignations) {
+//		this.tofCountryDesignations = tofCountryDesignations;
+//	}
 
-	public List<TofCountryDesignation> getTofCountryDesignations() {
-		return this.tofCountryDesignations;
-	}
-
-	public void setTofCountryDesignations(List<TofCountryDesignation> tofCountryDesignations) {
-		this.tofCountryDesignations = tofCountryDesignations;
-	}
-
-	public TofCountryDesignation addTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
-		getTofCountryDesignations().add(tofCountryDesignation);
-		tofCountryDesignation.setTofModel(this);
-
-		return tofCountryDesignation;
-	}
-
-	public TofCountryDesignation removeTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
-		getTofCountryDesignations().remove(tofCountryDesignation);
-		tofCountryDesignation.setTofModel(null);
-
-		return tofCountryDesignation;
-	}
+//	public TofCountryDesignation addTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
+//		getTofCountryDesignations().add(tofCountryDesignation);
+//		tofCountryDesignation.setTofModel(this);
+//
+//		return tofCountryDesignation;
+//	}
+//
+//	public TofCountryDesignation removeTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
+//		getTofCountryDesignations().remove(tofCountryDesignation);
+//		tofCountryDesignation.setTofModel(null);
+//
+//		return tofCountryDesignation;
+//	}
 
 	public TofManufacturer getTofManufacturer() {
 		return this.tofManufacturer;

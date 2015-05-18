@@ -1,9 +1,19 @@
 package lt.pap.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -18,10 +28,10 @@ public class TofEngine implements Serializable {
 
 	@Id
 	@Column(name="ENG_ID")
-	private int engId;
+	private Integer engId;
 
 	@Column(name="ENG_CCM_FROM")
-	private int engCcmFrom;
+	private Integer engCcmFrom;
 
 	@Column(name="ENG_CODE")
 	private String engCode;
@@ -36,16 +46,16 @@ public class TofEngine implements Serializable {
 	private String engDescription;
 
 	@Column(name="ENG_HP_FROM")
-	private int engHpFrom;
+	private Integer engHpFrom;
 
 	@Column(name="ENG_HP_UPTO")
-	private int engHpUpto;
+	private Integer engHpUpto;
 
 	@Column(name="ENG_KW_FROM")
-	private int engKwFrom;
+	private Integer engKwFrom;
 
 	@Column(name="ENG_KW_UPTO")
-	private int engKwUpto;
+	private Integer engKwUpto;
 
 	@Column(name="ENG_LITRES_FROM")
 	private BigDecimal engLitresFrom;
@@ -54,35 +64,50 @@ public class TofEngine implements Serializable {
 	private short engMfaId;
 
 	@Column(name="ENG_PCON_END")
-	private int engPconEnd;
+	private Integer engPconEnd;
 
 	@Column(name="ENG_PCON_START")
-	private int engPconStart;
+	private Integer engPconStart;
+	
+	
+	//IMPORTAN STUFF
+	@Column(name="ENG_KV_ENGINE_DES_ID") //va su situo
+	private Integer kvEngineDesId;
 
-	//bi-directional many-to-one association to TofDesignation
-	@OneToMany(mappedBy="tofEngine1")
-	private List<TofDesignation> tofDesignations1;
-
-	//bi-directional many-to-one association to TofDesignation
-	@OneToMany(mappedBy="tofEngine2")
-	private List<TofDesignation> tofDesignations2;
-
-	public TofEngine() {
+	public Integer getKvEngineDesId() {
+		return kvEngineDesId;
 	}
 
-	public int getEngId() {
+	public void setKvEngineDesId(Integer kvEngineDesId) {
+		this.kvEngineDesId = kvEngineDesId;
+	}
+
+	@OneToMany(fetch=FetchType.EAGER)  //NOTE: ENG_KV_ENGINE_DES_ID sutampa su property virsuj
+	@JoinColumn(name="DES_ID", referencedColumnName="ENG_KV_ENGINE_DES_ID",  insertable=false, updatable=false, nullable=true)
+	private Set<TofDesignation> kvEngineTranslations;
+	
+	
+	public Set<TofDesignation> getKvEngineTranslations() {
+		return kvEngineTranslations;
+	}
+	//IMPORTAN STUFF ENDS
+	
+
+
+
+	public Integer getEngId() {
 		return this.engId;
 	}
 
-	public void setEngId(int engId) {
+	public void setEngId(Integer engId) {
 		this.engId = engId;
 	}
 
-	public int getEngCcmFrom() {
+	public Integer getEngCcmFrom() {
 		return this.engCcmFrom;
 	}
 
-	public void setEngCcmFrom(int engCcmFrom) {
+	public void setEngCcmFrom(Integer engCcmFrom) {
 		this.engCcmFrom = engCcmFrom;
 	}
 
@@ -118,35 +143,35 @@ public class TofEngine implements Serializable {
 		this.engDescription = engDescription;
 	}
 
-	public int getEngHpFrom() {
+	public Integer getEngHpFrom() {
 		return this.engHpFrom;
 	}
 
-	public void setEngHpFrom(int engHpFrom) {
+	public void setEngHpFrom(Integer engHpFrom) {
 		this.engHpFrom = engHpFrom;
 	}
 
-	public int getEngHpUpto() {
+	public Integer getEngHpUpto() {
 		return this.engHpUpto;
 	}
 
-	public void setEngHpUpto(int engHpUpto) {
+	public void setEngHpUpto(Integer engHpUpto) {
 		this.engHpUpto = engHpUpto;
 	}
 
-	public int getEngKwFrom() {
+	public Integer getEngKwFrom() {
 		return this.engKwFrom;
 	}
 
-	public void setEngKwFrom(int engKwFrom) {
+	public void setEngKwFrom(Integer engKwFrom) {
 		this.engKwFrom = engKwFrom;
 	}
 
-	public int getEngKwUpto() {
+	public Integer getEngKwUpto() {
 		return this.engKwUpto;
 	}
 
-	public void setEngKwUpto(int engKwUpto) {
+	public void setEngKwUpto(Integer engKwUpto) {
 		this.engKwUpto = engKwUpto;
 	}
 
@@ -166,64 +191,64 @@ public class TofEngine implements Serializable {
 		this.engMfaId = engMfaId;
 	}
 
-	public int getEngPconEnd() {
+	public Integer getEngPconEnd() {
 		return this.engPconEnd;
 	}
 
-	public void setEngPconEnd(int engPconEnd) {
+	public void setEngPconEnd(Integer engPconEnd) {
 		this.engPconEnd = engPconEnd;
 	}
 
-	public int getEngPconStart() {
+	public Integer getEngPconStart() {
 		return this.engPconStart;
 	}
 
-	public void setEngPconStart(int engPconStart) {
+	public void setEngPconStart(Integer engPconStart) {
 		this.engPconStart = engPconStart;
 	}
-
-	public List<TofDesignation> getTofDesignations1() {
-		return this.tofDesignations1;
-	}
-
-	public void setTofDesignations1(List<TofDesignation> tofDesignations1) {
-		this.tofDesignations1 = tofDesignations1;
-	}
-
-	public TofDesignation addTofDesignations1(TofDesignation tofDesignations1) {
-		getTofDesignations1().add(tofDesignations1);
-		tofDesignations1.setTofEngine1(this);
-
-		return tofDesignations1;
-	}
-
-	public TofDesignation removeTofDesignations1(TofDesignation tofDesignations1) {
-		getTofDesignations1().remove(tofDesignations1);
-		tofDesignations1.setTofEngine1(null);
-
-		return tofDesignations1;
-	}
-
-	public List<TofDesignation> getTofDesignations2() {
-		return this.tofDesignations2;
-	}
-
-	public void setTofDesignations2(List<TofDesignation> tofDesignations2) {
-		this.tofDesignations2 = tofDesignations2;
-	}
-
-	public TofDesignation addTofDesignations2(TofDesignation tofDesignations2) {
-		getTofDesignations2().add(tofDesignations2);
-		tofDesignations2.setTofEngine2(this);
-
-		return tofDesignations2;
-	}
-
-	public TofDesignation removeTofDesignations2(TofDesignation tofDesignations2) {
-		getTofDesignations2().remove(tofDesignations2);
-		tofDesignations2.setTofEngine2(null);
-
-		return tofDesignations2;
-	}
+//
+//	public List<TofDesignation> getTofDesignations1() {
+//		return this.tofDesignations1;
+//	}
+//
+//	public void setTofDesignations1(List<TofDesignation> tofDesignations1) {
+//		this.tofDesignations1 = tofDesignations1;
+//	}
+//
+//	public TofDesignation addTofDesignations1(TofDesignation tofDesignations1) {
+//		getTofDesignations1().add(tofDesignations1);
+//		tofDesignations1.setTofEngine1(this);
+//
+//		return tofDesignations1;
+//	}
+//
+//	public TofDesignation removeTofDesignations1(TofDesignation tofDesignations1) {
+//		getTofDesignations1().remove(tofDesignations1);
+//		tofDesignations1.setTofEngine1(null);
+//
+//		return tofDesignations1;
+//	}
+//
+//	public List<TofDesignation> getTofDesignations2() {
+//		return this.tofDesignations2;
+//	}
+//
+//	public void setTofDesignations2(List<TofDesignation> tofDesignations2) {
+//		this.tofDesignations2 = tofDesignations2;
+//	}
+//
+//	public TofDesignation addTofDesignations2(TofDesignation tofDesignations2) {
+//		getTofDesignations2().add(tofDesignations2);
+//		tofDesignations2.setTofEngine2(this);
+//
+//		return tofDesignations2;
+//	}
+//
+//	public TofDesignation removeTofDesignations2(TofDesignation tofDesignations2) {
+//		getTofDesignations2().remove(tofDesignations2);
+//		tofDesignations2.setTofEngine2(null);
+//
+//		return tofDesignations2;
+//	}
 
 }
