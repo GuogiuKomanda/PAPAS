@@ -3,17 +3,17 @@ package lt.pap.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 
 /**
@@ -82,18 +82,23 @@ public class TofEngine implements Serializable {
 		this.kvEngineDesId = kvEngineDesId;
 	}
 
-	@OneToMany(fetch=FetchType.EAGER)  //NOTE: ENG_KV_ENGINE_DES_ID sutampa su property virsuj
+	@OneToMany  //NOTE: ENG_KV_ENGINE_DES_ID sutampa su property virsuj
 	@JoinColumn(name="DES_ID", referencedColumnName="ENG_KV_ENGINE_DES_ID",  insertable=false, updatable=false, nullable=true)
-	private Set<TofDesignation> kvEngineTranslations;
+	@LazyCollection(LazyCollectionOption.EXTRA)
+	private List<TofDesignation> kvEngineTranslations;
 	
 	
-	public Set<TofDesignation> getKvEngineTranslations() {
+	public List<TofDesignation> getKvEngineTranslations() {
 		return kvEngineTranslations;
+	}
+
+	public void setKvEngineTranslations(List<TofDesignation> kvEngineTranslations) {
+		this.kvEngineTranslations = kvEngineTranslations;
 	}
 	//IMPORTAN STUFF ENDS
 	
-
-
+	public TofEngine() {
+	}
 
 	public Integer getEngId() {
 		return this.engId;
@@ -250,5 +255,11 @@ public class TofEngine implements Serializable {
 //
 //		return tofDesignations2;
 //	}
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return 17;
+	}
 
 }

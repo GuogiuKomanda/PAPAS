@@ -27,8 +27,8 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
 @EnableTransactionManagement
-//@EnableJpaRepositories(basePackages = {"lt.pap.dao"})
-//@ComponentScan(basePackages = {"lt.pap.dao", "lt.pap.service", "lt.pap.bean","lt.pap.filter", "lt.pap.converter"})
+@EnableJpaRepositories(basePackages = {"lt.pap.dao"})
+@ComponentScan(basePackages = {"lt.pap.dao", "lt.pap.service", "lt.pap.bean"})
 @PropertySource("classpath:application.properties")
 public class SpringDataConfig {
 
@@ -59,7 +59,7 @@ public class SpringDataConfig {
 
     LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
     entityManagerFactoryBean.setDataSource(dataSource());
-//    entityManagerFactoryBean.setPackagesToScan("lt.pap.model");
+    entityManagerFactoryBean.setPackagesToScan("lt.pap.model");
     entityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);
     entityManagerFactoryBean.setJpaProperties(properties);
 

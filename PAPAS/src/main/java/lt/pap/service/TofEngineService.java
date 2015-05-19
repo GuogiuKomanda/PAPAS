@@ -24,7 +24,7 @@ public class TofEngineService
         return tofengineRepository.findAll();
     }
 
-    public TofEngine findOne(Long engId)
+    public TofEngine findOne(Integer engId)
     {
         return tofengineRepository.findOne(engId);
     }

@@ -22,14 +22,6 @@ public class TofDesText implements Serializable {
 	@Column(name="TEX_TEXT")
 	private String texText;
 
-	//bi-directional many-to-one association to TofCountryDesignation
-	@OneToMany(mappedBy="tofDesText")
-	private List<TofCountryDesignation> tofCountryDesignations;
-
-	//bi-directional many-to-one association to TofDesignation
-	@OneToMany(mappedBy="tofDesText")
-	private List<TofDesignation> tofDesignations;
-
 	public TofDesText() {
 	}
 
@@ -48,49 +40,4 @@ public class TofDesText implements Serializable {
 	public void setTexText(String texText) {
 		this.texText = texText;
 	}
-
-	public List<TofCountryDesignation> getTofCountryDesignations() {
-		return this.tofCountryDesignations;
-	}
-
-	public void setTofCountryDesignations(List<TofCountryDesignation> tofCountryDesignations) {
-		this.tofCountryDesignations = tofCountryDesignations;
-	}
-
-	public TofCountryDesignation addTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
-		getTofCountryDesignations().add(tofCountryDesignation);
-		tofCountryDesignation.setTofDesText(this);
-
-		return tofCountryDesignation;
-	}
-
-	public TofCountryDesignation removeTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
-		getTofCountryDesignations().remove(tofCountryDesignation);
-		tofCountryDesignation.setTofDesText(null);
-
-		return tofCountryDesignation;
-	}
-
-	public List<TofDesignation> getTofDesignations() {
-		return this.tofDesignations;
-	}
-
-	public void setTofDesignations(List<TofDesignation> tofDesignations) {
-		this.tofDesignations = tofDesignations;
-	}
-
-	public TofDesignation addTofDesignation(TofDesignation tofDesignation) {
-		getTofDesignations().add(tofDesignation);
-		tofDesignation.setTofDesText(this);
-
-		return tofDesignation;
-	}
-
-	public TofDesignation removeTofDesignation(TofDesignation tofDesignation) {
-		getTofDesignations().remove(tofDesignation);
-		tofDesignation.setTofDesText(null);
-
-		return tofDesignation;
-	}
-
 }

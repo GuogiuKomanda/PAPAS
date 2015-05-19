@@ -1,7 +1,14 @@
 package lt.pap.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 /**
@@ -18,8 +25,11 @@ public class TofDesignation implements Serializable {
 	private TofDesignationPK id;
 
 	//bi-directional many-to-one association to TofDesText
-	@ManyToOne
-	@JoinColumn(name="DES_TEX_ID")
+	@Column(name="DES_TEX_ID")
+	private Integer desTextId;
+
+	@OneToOne
+	@JoinColumn(name="DES_TEX_ID",  insertable=false, updatable=false, nullable=true)
 	private TofDesText tofDesText;
 
 //	//bi-directional many-to-one association to TofEngine
@@ -53,6 +63,7 @@ public class TofDesignation implements Serializable {
 //	private TofType tofType3;
 
 	public TofDesignation() {
+		super();
 	}
 
 	public TofDesignationPK getId() {
@@ -63,6 +74,14 @@ public class TofDesignation implements Serializable {
 		this.id = id;
 	}
 
+	public Integer getDesTextId() {
+		return desTextId;
+	}
+
+	public void setDesTextId(Integer desTextId) {
+		this.desTextId = desTextId;
+	}
+	
 	public TofDesText getTofDesText() {
 		return this.tofDesText;
 	}
