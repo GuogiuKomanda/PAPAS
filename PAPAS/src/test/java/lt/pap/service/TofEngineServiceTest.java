@@ -29,6 +29,11 @@ public class TofEngineServiceTest {
 		for (TofEngine e : eList) {
 			System.out.println(e.getEngKvEngineString());
 		}
+		
+		eList = tofEngineService.findAll(LOCALE_ID);
+		for (TofEngine e : eList) {
+			System.out.println(e.getEngKvEngineString());
+		}
 	}
 
 	@Test
