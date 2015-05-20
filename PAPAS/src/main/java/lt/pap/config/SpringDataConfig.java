@@ -48,7 +48,7 @@ public class SpringDataConfig {
   @Bean
   public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws NamingException {
     HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
-    hibernateJpaVendorAdapter.setDatabase(Database.POSTGRESQL);
+    hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
 
     Properties properties = new Properties();
 

@@ -11,27 +11,42 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class TofEngineService
-{
-    /**
+public class TofEngineService {
+	/**
      * 
      */
-    @Autowired
-    private TofEngineRepository tofengineRepository;
+	@Autowired
+	private TofEngineRepository tofEngineRepository;
+	
+	@Autowired
+	private TofDesignationService tofDesignationService;
 
-    public List<TofEngine> findAll()
-    {
-        return tofengineRepository.findAll();
-    }
+	@Transactional
+	public List<TofEngine> findAll(short localeId) {
+		List<TofEngine> engineList = tofEngineRepository.findAll();
+		loadDesignations(engineList, localeId);
+		return engineList;
+	}
 
-    public TofEngine findOne(Integer engId)
-    {
-        return tofengineRepository.findOne(engId);
-    }
+	@Transactional
+	public TofEngine findOne(Integer engineId, short localeId) {
+		TofEngine engine = tofEngineRepository.findOne(engineId);
+		loadDesignation(engine, localeId);
+		return engine;
+	}
 
-    public TofEngine save(TofEngine engine) {
-        return tofengineRepository.save(engine);
-        
-      }
-    
+	public TofEngine save(TofEngine engine) {
+		return tofEngineRepository.save(engine);
+	}
+	
+	private void loadDesignations(List<TofEngine> engineList, short localeId){
+		for(TofEngine engine : engineList) {
+			loadDesignation(engine, localeId);
+		}
+	}
+
+	private void loadDesignation(TofEngine engine, short localeId){
+		String engKvEngineString = tofDesignationService.getDesignationString(engine.getEngKvEngineDesId(), localeId);
+		engine.setEngKvEngineString(engKvEngineString);
+	}
 }

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.springframework.data.annotation.Transient;
 
 
 /**
@@ -69,34 +70,43 @@ public class TofEngine implements Serializable {
 	@Column(name="ENG_PCON_START")
 	private Integer engPconStart;
 	
-	
-	//IMPORTAN STUFF
 	@Column(name="ENG_KV_ENGINE_DES_ID") //va su situo
-	private Integer kvEngineDesId;
+	private Integer engKvEngineDesId;
 
-	public Integer getKvEngineDesId() {
-		return kvEngineDesId;
-	}
-
-	public void setKvEngineDesId(Integer kvEngineDesId) {
-		this.kvEngineDesId = kvEngineDesId;
-	}
-
-	@OneToMany  //NOTE: ENG_KV_ENGINE_DES_ID sutampa su property virsuj
-	@JoinColumn(name="DES_ID", referencedColumnName="ENG_KV_ENGINE_DES_ID",  insertable=false, updatable=false, nullable=true)
-	@LazyCollection(LazyCollectionOption.EXTRA)
-	private List<TofDesignation> kvEngineTranslations;
+	//TODO visiems des_id laukams sukuriam papildoma String lauka
+	@Transient
+	private transient String engKvEngineString;
 	
 	
-	public List<TofDesignation> getKvEngineTranslations() {
-		return kvEngineTranslations;
-	}
-
-	public void setKvEngineTranslations(List<TofDesignation> kvEngineTranslations) {
-		this.kvEngineTranslations = kvEngineTranslations;
-	}
-	//IMPORTAN STUFF ENDS
+//	//IMPORTAN STUFF
+//	@Column(name="ENG_KV_ENGINE_DES_ID") //va su situo
+//	private Integer kvEngineDesId;
+//
+//	public Integer getKvEngineDesId() {
+//		return kvEngineDesId;
+//	}
+//
+//	public void setKvEngineDesId(Integer kvEngineDesId) {
+//		this.kvEngineDesId = kvEngineDesId;
+//	}
+//
+//	@OneToMany  //NOTE: ENG_KV_ENGINE_DES_ID sutampa su property virsuj
+//	@JoinColumn(name="DES_ID", referencedColumnName="ENG_KV_ENGINE_DES_ID",  insertable=false, updatable=false, nullable=true)
+//	@LazyCollection(LazyCollectionOption.EXTRA)
+//	private List<TofDesignation> kvEngineTranslations;
+//	
+//	
+//	public List<TofDesignation> getKvEngineTranslations() {
+//		return kvEngineTranslations;
+//	}
+//
+//	public void setKvEngineTranslations(List<TofDesignation> kvEngineTranslations) {
+//		this.kvEngineTranslations = kvEngineTranslations;
+//	}
+//	//IMPORTAN STUFF ENDS
 	
+
+
 	public TofEngine() {
 	}
 
@@ -211,6 +221,24 @@ public class TofEngine implements Serializable {
 	public void setEngPconStart(Integer engPconStart) {
 		this.engPconStart = engPconStart;
 	}
+	
+	public Integer getEngKvEngineDesId() {
+		return engKvEngineDesId;
+	}
+
+	public void setEngKvEngineDesId(Integer engKvEngineDesId) {
+		this.engKvEngineDesId = engKvEngineDesId;
+	}
+
+	public String getEngKvEngineString() {
+		return engKvEngineString;
+	}
+
+	public void setEngKvEngineString(String engKvEngineString) {
+		this.engKvEngineString = engKvEngineString;
+	}
+	
+	
 //
 //	public List<TofDesignation> getTofDesignations1() {
 //		return this.tofDesignations1;
@@ -255,11 +283,4 @@ public class TofEngine implements Serializable {
 //
 //		return tofDesignations2;
 //	}
-
-	@Override
-	public int hashCode() {
-		// TODO Auto-generated method stub
-		return 17;
-	}
-
 }
