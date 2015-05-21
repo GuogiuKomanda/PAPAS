@@ -37,14 +37,9 @@ public class TofEngine implements Serializable {
 	@Column(name="ENG_CODE")
 	private String engCode;
 
-	@Column(name="ENG_COMPRESSION_UPTO")
-	private BigDecimal engCompressionUpto;
-
 	@Column(name="ENG_CYLINDERS")
 	private short engCylinders;
 
-	@Column(name="ENG_DESCRIPTION")
-	private String engDescription;
 
 	@Column(name="ENG_HP_FROM")
 	private Integer engHpFrom;
@@ -76,6 +71,13 @@ public class TofEngine implements Serializable {
 	//TODO visiems des_id laukams sukuriam papildoma String lauka
 	@Transient
 	private transient String engKvEngineString;
+	
+	@Column(name="ENG_KV_FUEL_TYPE_DES_ID") //va su situo
+    private Integer engKvFuelTypeDesId;
+
+    //TODO visiems des_id laukams sukuriam papildoma String lauka
+    @Transient
+    private transient String engKvFuelTypeString;
 	
 	
 //	//IMPORTAN STUFF
@@ -134,13 +136,6 @@ public class TofEngine implements Serializable {
 		this.engCode = engCode;
 	}
 
-	public BigDecimal getEngCompressionUpto() {
-		return this.engCompressionUpto;
-	}
-
-	public void setEngCompressionUpto(BigDecimal engCompressionUpto) {
-		this.engCompressionUpto = engCompressionUpto;
-	}
 
 	public short getEngCylinders() {
 		return this.engCylinders;
@@ -148,14 +143,6 @@ public class TofEngine implements Serializable {
 
 	public void setEngCylinders(short engCylinders) {
 		this.engCylinders = engCylinders;
-	}
-
-	public String getEngDescription() {
-		return this.engDescription;
-	}
-
-	public void setEngDescription(String engDescription) {
-		this.engDescription = engDescription;
 	}
 
 	public Integer getEngHpFrom() {

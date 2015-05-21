@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @ContextConfiguration(classes = { InitConfig.class })
 public class TofEngineServiceTest {
 
-	private static short LOCALE_ID = 4;
+	private static short LOCALE_ID = 34; 
 
 	@Autowired
 	TofEngineService tofEngineService;

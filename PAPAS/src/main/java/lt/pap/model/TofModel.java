@@ -1,7 +1,11 @@
 package lt.pap.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import org.springframework.data.annotation.Transient;
+
 import java.util.List;
 
 
@@ -39,12 +43,14 @@ public class TofModel implements Serializable {
 
 	@Column(name="MOD_PCON_START")
 	private int modPconStart;
-//
-//	//bi-directional many-to-one association to TofCountryDesignation
-//	@OneToMany(mappedBy="tofModel")
-//	private List<TofCountryDesignation> tofCountryDesignations;
+	
+	@Column(name="MOD_CDS_ID") //va su situo
+    private Integer ModCdsId;
 
-	//bi-directional many-to-one association to TofManufacturer
+    //TODO visiems des_id laukams sukuriam papildoma String lauka
+    @Transient
+    private transient String ModString;
+    
 	@ManyToOne
 	@JoinColumn(name="MOD_MFA_ID")
 	private TofManufacturer tofManufacturer;
