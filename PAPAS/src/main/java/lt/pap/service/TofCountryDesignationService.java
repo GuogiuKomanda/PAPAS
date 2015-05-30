@@ -20,13 +20,13 @@ public class TofCountryDesignationService {
 	private TofCountryDesignationRepository tofCountryDesignationRepository;
 
 	@Autowired
-	private TofDesignationService tofDesignationService;
+	private TofCountryDesignationService tofCountryDesignationService;
 
-	public String getCountryDesignationString(Integer countryDesignationId,	Integer countryId) {
-		return getCountryDesignationString(countryDesignationId, countryId,	(short) 4); // 4 - English. At the moment all county_designations are in English only
+	public String getCountryDesignationString(Integer countryDesignationId,	Integer countryId,  Short localeId) {
+		return getCountryDesignationsString(countryDesignationId, countryId,	localeId); // 4 - English. At the moment all county_designations are in English only
 	}
 
-	private String getCountryDesignationString(Integer countryDesignationId,
+	private String getCountryDesignationsString(Integer countryDesignationId,
 			Integer countryId, Short localeId) {
 
 		List<TofCountryDesignation> cdList = tofCountryDesignationRepository.findCountryDesignationById(countryDesignationId, countryId, localeId);

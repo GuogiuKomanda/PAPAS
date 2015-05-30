@@ -17,17 +17,34 @@ public class TofModelService
 {
     @Autowired
     private TofModelRepository tofmodelRepository;
+    
+    @Autowired
+    private TofCountryDesignationService tofCountryDesignationService;
 
-    public List<TofModel> findAll()
+    public List<TofModel> findAll(short localeId,Integer countryId)
     {
+        List<TofModel> modelList = tofmodelRepository.findAll();
+        loadCountryDesignations(modelList,countryId ,localeId);
         return tofmodelRepository.findAll();
+              
     }
-
-    public TofModel findOne(Long modid)
-    {
-        return tofmodelRepository.findOne(modid);
+    
+    @Transactional
+    public TofModel findOne(Integer modelId,Integer countryId, short localeId) {
+    TofModel model = tofmodelRepository.findOne(modelId);
+        loadCountryDesignation(model, countryId, localeId );
+        return model;
     }
 
     
+    private void loadCountryDesignations(List<TofModel> modelList,Integer countryId, short localeId){
+        for(TofModel model : modelList) {
+            loadCountryDesignation(model, countryId, localeId);
+        }
+    }
     
+    private void loadCountryDesignation(TofModel model,Integer countryId, short localeId){
+        String ModString = tofCountryDesignationService.getCountryDesignationString(model.getModCdsId(), countryId, localeId);
+        model.setModString( ModString);
+    }
 }

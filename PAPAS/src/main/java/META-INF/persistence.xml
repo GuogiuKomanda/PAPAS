@@ -15,5 +15,9 @@
 		<class>lt.pap.model.TofModel</class>
 		<class>lt.pap.model.TofType</class>
 		<class>lt.pap.model.TofUserSetting</class>
+		<class>lt.pap.model.Fuel</class>
+		<class>lt.pap.model.WPart</class>
+		<class>lt.pap.converter.YearConverter</class>
+		<class>lt.pap.converter.YearMonthConverter</class>
 	</persistence-unit>
 </persistence>

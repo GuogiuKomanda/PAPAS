@@ -1,7 +1,9 @@
 package lt.pap.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  * The primary key class for the tof_link_typ_eng database table.

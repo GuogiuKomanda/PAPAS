@@ -1,12 +1,18 @@
 package lt.pap.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.springframework.data.annotation.Transient;
-
-import java.util.List;
 
 
 /**
@@ -177,5 +183,25 @@ public class TofModel implements Serializable {
 
 		return tofType;
 	}
+
+    public Integer getModCdsId()
+    {
+        return ModCdsId;
+    }
+
+    public void setModCdsId(Integer modCdsId)
+    {
+        ModCdsId = modCdsId;
+    }
+
+    public String getModString()
+    {
+        return ModString;
+    }
+
+    public void setModString(String modString)
+    {
+        ModString = modString;
+    }
 
 }
