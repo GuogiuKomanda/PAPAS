@@ -74,7 +74,7 @@ public class Functions
         return  tofmanufacturerList.stream().map(tofmanufacturerToSelectItem).collect(Collectors.toList());
     }
     
-    public static List<SelectItem> tofmodelToSelectItems(List<TofModel> tofmodelList) {
+	public static List<SelectItem> tofmodelToSelectItems(List<TofModel> tofmodelList) {
         return  tofmodelList.stream().map(tofmodelToSelectItem).collect(Collectors.toList());
         }
     

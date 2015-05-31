@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:s="http://www.springframework.org/tags"
+	xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+	<h:outputScript name="jquery.js" />
+	<h:outputScript library="chosen" name="chosen.jquery.js" />
+	<h:outputScript library="chosen" name="chosen.proto.js" />
+	<h:outputStylesheet library="chosen" name="chosen.css" />
+</h:head>
+
+<h:form id="form">
+	<h:panelGrid id="panel" columns="3" cellpadding="0">
+
+		<h:outputText value="Make" />
+		<h:outputText value="Model" />
+		<h:outputText value="Fuel type" />
+
+
+		<h:panelGroup id="makePanel">
+			<h:selectOneMenu id="makeSelect" value="#{engineListBean.selectedTofManufacturer}" style="width:350px;" styleClass="chosen-select">
+				<f:selectItem itemLabel="---" itemValue="#{null}" />
+				<f:selectItems value="#{engineListBean.availableTofManufacturerList}" />
+				<a4j:ajax listener="#{engineListBean.updateTofModelList}" execute="makeSelect" render="modelPanel"
+					onchange="jQuery('.chosen').trigger('chosen:updated');" />
+				<h:messages />
+			</h:selectOneMenu>
+			<h:outputScript>
+               jQuery("#form\\:makeSelect").chosen({});
+        	</h:outputScript>
+		</h:panelGroup>
+
+
+		<h:panelGroup id="modelPanel">
+
+			<h:selectManyListbox id="modelSelect" value="#{engineListBean.selectedTofModelList}" style="width:350px;"
+				styleClass="chosen-select" multiple="true" tabindex="6" data-placeholder="Select models">
+				<f:selectItems value="#{engineListBean.availableTofModelList}" />
+				<a4j:ajax listener="#{engineListBean.updateFuelList}" />
+			</h:selectManyListbox>
+
+			<h:outputScript>
+               jQuery("#form\\:modelSelect").chosen({});
+        	</h:outputScript>
+
+		</h:panelGroup>
+
+
+		<h:selectManyListbox id="fuelSelect" value="#{engineListBean.selectedFuelList}" style="width:350px;"
+			styleClass="chosen-select" multiple="true" tabindex="1" data-placeholder="Select fuel">
+			<f:selectItems value="#{engineListBean.availableFuelList}" />
+			<a4j:ajax listener="#{engineListBean.updateFuelList}" />
+		</h:selectManyListbox>
+
+			<h:outputScript>
+               jQuery("#form\\:fuelSelect").chosen({});
+        	</h:outputScript>
+
+
+	</h:panelGrid>
+	
+	<a4j:commandButton value="Search" render="resultsTable" execute="@form" action="#{engineListBean.doSearch}"/>
+	
+	<rich:dataTable value="#{engineListBean.wpartList}" var="wp" id="resultsTable" rows="30">
+		<f:facet name="noData">
+	                Nothing found
+	            </f:facet>
+	
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Make" />
+			</f:facet>
+			<h:outputText value="#{wp.status}" />
+		</rich:column>
+	
+	</rich:dataTable>
+
+	
+</h:form>
+<h:messages />
+
+
+
+</html>

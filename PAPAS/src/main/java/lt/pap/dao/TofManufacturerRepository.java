@@ -4,7 +4,7 @@ import lt.pap.model.TofManufacturer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TofManufacturerRepository extends JpaRepository<TofManufacturer, Long>
+public interface TofManufacturerRepository extends JpaRepository<TofManufacturer, Short>
 {
     
 }

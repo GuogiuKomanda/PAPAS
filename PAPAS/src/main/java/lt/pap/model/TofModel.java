@@ -27,7 +27,7 @@ public class TofModel implements Serializable {
 
 	@Id
 	@Column(name="MOD_ID")
-	private int modId;
+	private Integer modId;
 
 	@Column(name="MOD_AXL")
 	private short modAxl;
@@ -45,10 +45,10 @@ public class TofModel implements Serializable {
 	private byte[] modPcCtm;
 
 	@Column(name="MOD_PCON_END")
-	private int modPconEnd;
+	private Integer modPconEnd;
 
 	@Column(name="MOD_PCON_START")
-	private int modPconStart;
+	private Integer modPconStart;
 	
 	@Column(name="MOD_CDS_ID") //va su situo
     private Integer ModCdsId;
@@ -68,11 +68,11 @@ public class TofModel implements Serializable {
 	public TofModel() {
 	}
 
-	public int getModId() {
+	public Integer getModId() {
 		return this.modId;
 	}
 
-	public void setModId(int modId) {
+	public void setModId(Integer modId) {
 		this.modId = modId;
 	}
 
@@ -116,19 +116,19 @@ public class TofModel implements Serializable {
 		this.modPcCtm = modPcCtm;
 	}
 
-	public int getModPconEnd() {
+	public Integer getModPconEnd() {
 		return this.modPconEnd;
 	}
 
-	public void setModPconEnd(int modPconEnd) {
+	public void setModPconEnd(Integer modPconEnd) {
 		this.modPconEnd = modPconEnd;
 	}
 
-	public int getModPconStart() {
+	public Integer getModPconStart() {
 		return this.modPconStart;
 	}
 
-	public void setModPconStart(int modPconStart) {
+	public void setModPconStart(Integer modPconStart) {
 		this.modPconStart = modPconStart;
 	}
 //

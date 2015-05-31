@@ -22,7 +22,7 @@ public class TofManufacturerService
         return tofmanufacturerRepository.findAll();
     }
 
-    public  TofManufacturer findOne(Long mfaid)
+    public  TofManufacturer findOne(Short mfaid)
     {
         return tofmanufacturerRepository.findOne(mfaid);
     }

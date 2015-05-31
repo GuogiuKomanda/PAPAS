@@ -21,8 +21,8 @@ public class TofEngineServiceTest {
 
 	@Autowired
 	TofEngineService tofEngineService;
-
-	@Test
+//
+//	@Test
 	@Transactional
 	public void testFindAll() {
 		List<TofEngine> eList = tofEngineService.findAll(LOCALE_ID);
@@ -36,10 +36,16 @@ public class TofEngineServiceTest {
 		}
 	}
 
-	@Test
+//	@Test
 	@Transactional
 	public void testFindOne() {
 		TofEngine e = tofEngineService.findOne(3, LOCALE_ID);
 		System.out.println(e.getEngKvEngineString());
 	}
+	
+	@Test
+	public void test() {
+
+	}
+	
 }

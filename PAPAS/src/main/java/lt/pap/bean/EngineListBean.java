@@ -7,11 +7,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 
 import lt.pap.model.TofManufacturer;
-import lt.pap.model.TofModel;
 import lt.pap.model.WPart;
 import lt.pap.model.utils.Functions;
 import lt.pap.service.FuelService;
 import lt.pap.service.TofManufacturerService;
+import lt.pap.service.TofModelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,22 +19,26 @@ import org.springframework.stereotype.Component;
 
 
 
-@Component
+@Component("engineListBean")
 @Scope("session")
-public class EngineBean {
+public class EngineListBean {
+	
+    @Autowired
+    private SessionBean session;
+	
     @Autowired
     private TofManufacturerService tofmanufacturerSercive;
 
     @Autowired
-    private TofModel tofmodelService;
+    private TofModelService tofmodelService;
 
-    
     @Autowired
     private FuelService fuelService;
 
-    @Autowired
+//    @Autowired
   //  private WPartService wpartService;
     // manufacturer
+    
     private String selectedTofManufacturer = "";
 
     private List<SelectItem> availableTofManufacturerList;
@@ -54,17 +58,17 @@ public class EngineBean {
     @PostConstruct
     private void init() {
         availableTofManufacturerList = Functions.tofmanufacturerToSelectItems(tofmanufacturerSercive.findAll());
-        availableTofModelList = Functions.tofmodelToSelectItems(tofmodelService.findAll());
+        availableTofModelList = Functions.tofmodelToSelectItems(tofmodelService.findAll(session.getCountryId(), session.getLocaleId()));
         availableFuelList = Functions.fuelToSelectItems(fuelService.findAll());
 
     }
 
     public void updateTofModelList() {
         if (selectedTofManufacturer != null) {
-            TofManufacturer mk =  tofmanufacturerSercive.findOne(Long.parseLong(selectedTofManufacturer));
-            availableTofModelList = Functions.modelToSelectItems(tofmodelService.findByModelGroupTofManufacturerId(mk.getMfaId()));
+            TofManufacturer mk =  tofmanufacturerSercive.findOne(Short.parseShort(selectedTofManufacturer));
+            availableTofModelList = Functions.tofmodelToSelectItems(tofmodelService.findByMake(mk.getMfaId(), session.getCountryId(), session.getLocaleId()));
         } else {
-          availableTofModelList = Functions.modelToSelectItems(tofmodelService.findAll());
+          availableTofModelList = Functions.tofmodelToSelectItems(tofmodelService.findAll(session.getCountryId(), session.getLocaleId()));
         }
     }
 

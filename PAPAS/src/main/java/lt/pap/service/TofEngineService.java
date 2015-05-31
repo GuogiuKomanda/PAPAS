@@ -24,14 +24,14 @@ public class TofEngineService {
 	@Transactional
 	public List<TofEngine> findAll(short localeId) {
 		List<TofEngine> engineList = tofEngineRepository.findAll();
-		loadDesignations(engineList, localeId);
+//		loadDesignations(engineList, localeId);
 		return engineList;
 	}
 
 	@Transactional
 	public TofEngine findOne(Integer engineId, short localeId) {
 		TofEngine engine = tofEngineRepository.findOne(engineId);
-		loadDesignation(engine, localeId);
+//		loadDesignation(engine, localeId);
 		return engine;
 	}
 

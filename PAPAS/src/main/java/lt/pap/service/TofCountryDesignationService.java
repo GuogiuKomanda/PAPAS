@@ -4,9 +4,7 @@ import java.util.List;
 
 import lt.pap.dao.TofCountryDesignationRepository;
 import lt.pap.model.TofCountryDesignation;
-import lt.pap.model.TofCountryDesignationPK;
 import lt.pap.model.TofDesText;
-import lt.pap.model.TofDesignation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +17,6 @@ public class TofCountryDesignationService {
 	@Autowired
 	private TofCountryDesignationRepository tofCountryDesignationRepository;
 
-	@Autowired
-	private TofCountryDesignationService tofCountryDesignationService;
 
 	public String getCountryDesignationString(Integer countryDesignationId,	Integer countryId,  Short localeId) {
 		return getCountryDesignationsString(countryDesignationId, countryId,	localeId); // 4 - English. At the moment all county_designations are in English only

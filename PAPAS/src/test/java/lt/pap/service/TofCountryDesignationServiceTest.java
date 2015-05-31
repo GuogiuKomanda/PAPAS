@@ -11,14 +11,19 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { InitConfig.class })
 public class TofCountryDesignationServiceTest {
-    private static short LOCALE_ID = 34; 
+	private static short LOCALE_ID = 34;
 	@Autowired
 	TofCountryDesignationService tofCountryDesignationService;
-	
-	@Test
+
+	// @Test
 	public void findOneTest() {
-		String tcd = tofCountryDesignationService.getCountryDesignationString(541002222, 186, LOCALE_ID);
+		String tcd = tofCountryDesignationService.getCountryDesignationString(
+				541002222, 186, LOCALE_ID);
 		System.out.println(tcd);
 	}
 
+	@Test
+	public void test() {
+
+	}
 }

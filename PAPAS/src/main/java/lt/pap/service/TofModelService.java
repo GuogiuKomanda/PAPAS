@@ -21,11 +21,19 @@ public class TofModelService
     @Autowired
     private TofCountryDesignationService tofCountryDesignationService;
 
-    public List<TofModel> findAll(short localeId,Integer countryId)
+    public List<TofModel> findAll(int countryId, short localeId)
     {
         List<TofModel> modelList = tofmodelRepository.findAll();
         loadCountryDesignations(modelList,countryId ,localeId);
-        return tofmodelRepository.findAll();
+        return modelList;
+              
+    }
+    
+    public List<TofModel> findByMake(short makeId, int countryId, short localeId)
+    {
+        List<TofModel> modelList = tofmodelRepository.findByTofManufacturerMfaId(makeId);
+        loadCountryDesignations(modelList,countryId ,localeId);
+        return modelList;
               
     }
     

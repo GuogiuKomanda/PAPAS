@@ -16,10 +16,10 @@ public class Fuel
     @Column(name="DES_ID")
     private Integer desId;
 
-    @Column(name="ORDER")
+    @Column(name="FORDER")
     private Integer order;
     
-    @Column(name="STATUS")
+    @Column(name="FSTATUS")
     private boolean status;
 
     public Integer getDesId()
