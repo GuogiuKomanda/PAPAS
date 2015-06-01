@@ -52,6 +52,10 @@ public class TofModel implements Serializable {
 	
 	@Column(name="MOD_CDS_ID") //va su situo
     private Integer ModCdsId;
+	
+//	@ManyToOne
+//	@JoinColumn(name="MOD_CDS_ID")
+//	private TofCountryDesignation tofModCds;
 
     //TODO visiems des_id laukams sukuriam papildoma String lauka
     @Transient
@@ -203,5 +207,15 @@ public class TofModel implements Serializable {
     {
         ModString = modString;
     }
+
+//	public TofCountryDesignation getTofModCds() {
+//		return tofModCds;
+//	}
+//
+//	public void setTofModCds(TofCountryDesignation tofModCds) {
+//		this.tofModCds = tofModCds;
+//	}
+    
+    
 
 }

@@ -26,14 +26,17 @@ public class EngineListBean {
     @Autowired
     private SessionBean session;
 	
+//    @Autowired
+//    private TofManufacturerService manufacturerSercive;
+//
+//    @Autowired
+//    private TofModelService modelService;
+//
+//    @Autowired
+//    private FuelService fuelService;
+    
     @Autowired
-    private TofManufacturerService tofmanufacturerSercive;
-
-    @Autowired
-    private TofModelService tofmodelService;
-
-    @Autowired
-    private FuelService fuelService;
+    private ApplicationBean applicationBean;
 
 //    @Autowired
   //  private WPartService wpartService;
@@ -44,12 +47,12 @@ public class EngineListBean {
     private List<SelectItem> availableTofManufacturerList;
 
     // model
-    private List<Long> selectedTofModelList = new ArrayList<Long>();
+    private List<Integer> selectedTofModelList = new ArrayList<Integer>();
 
     private List<SelectItem> availableTofModelList;
 
     // fuel
-    private List<Long> selectedFuelList= new ArrayList<Long>();
+    private List<Integer> selectedFuelList= new ArrayList<Integer>();
 
     private List<SelectItem> availableFuelList;
     
@@ -57,31 +60,22 @@ public class EngineListBean {
 
     @PostConstruct
     private void init() {
-        availableTofManufacturerList = Functions.tofmanufacturerToSelectItems(tofmanufacturerSercive.findAll());
-        availableTofModelList = Functions.tofmodelToSelectItems(tofmodelService.findAll(session.getCountryId(), session.getLocaleId()));
-        availableFuelList = Functions.fuelToSelectItems(fuelService.findAll());
+        availableTofManufacturerList = applicationBean.getAvailableManufacturers(session.getCountryId(),  session.getLocaleId());
+        availableFuelList = applicationBean.getAvailableFuels( session.getCountryId(),  session.getLocaleId());
 
     }
 
     public void updateTofModelList() {
         if (selectedTofManufacturer != null) {
-            TofManufacturer mk =  tofmanufacturerSercive.findOne(Short.parseShort(selectedTofManufacturer));
-            availableTofModelList = Functions.tofmodelToSelectItems(tofmodelService.findByMake(mk.getMfaId(), session.getCountryId(), session.getLocaleId()));
+        	short mfaId = Short.parseShort(selectedTofManufacturer);
+        	availableTofModelList = applicationBean.getAvailableModels(mfaId, session.getCountryId(),  session.getLocaleId());
         } else {
-          availableTofModelList = Functions.tofmodelToSelectItems(tofmodelService.findAll(session.getCountryId(), session.getLocaleId()));
+          availableTofModelList = new ArrayList<SelectItem>();
         }
     }
 
     public void updateFuelList() {
-//      if (selectedModelList != null) {
-////            TofManufacturer mk =  manufacturerService.findOne(Long.parseLong(selectedTofManufacturer));
-////            availableModelList = Functions.modelToSelectItems(modelService.findByModelGroupTofManufacturerId(mk.getId()));
-//          List<Long> modelIdList = selectedModelList.stream().map(m -> ((Model)m.getValue()).getId()).collect(Collectors.toList());
-////            List<>
-////            availableFuelTypeList
-//      } else {
-//          availableFuelTypeList = Functions.fuelTypeToSelectItems(fueltypeService.findAll());
-//      }
+
     }
     
     public void doSearch(){
@@ -108,11 +102,11 @@ public class EngineListBean {
         this.availableTofManufacturerList = availableTofManufacturerList;
     }
 
-    public List<Long> getSelectedTofModelList() {
+    public List<Integer> getSelectedTofModelList() {
         return selectedTofModelList;
     }
 
-    public void setSelectedTofModelList(List<Long> selectedTofModelList) {
+    public void setSelectedTofModelList(List<Integer> selectedTofModelList) {
         this.selectedTofModelList = selectedTofModelList;
     }
 
@@ -124,11 +118,11 @@ public class EngineListBean {
         this.availableTofModelList = availableTofModelList;
     }
 
-    public List<Long> getSelectedFuelList() {
+    public List<Integer> getSelectedFuelList() {
         return selectedFuelList;
     }
 
-    public void setSelectedFuelList(List<Long> selectedFuelList) {
+    public void setSelectedFuelList(List<Integer> selectedFuelList) {
         this.selectedFuelList = selectedFuelList;
     }
 

@@ -1,6 +1,6 @@
 package lt.pap.service;
 
-import init.InitConfig;
+import init.TestConfig;
 
 import java.util.List;
 
@@ -14,13 +14,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { InitConfig.class })
+@ContextConfiguration(classes = { TestConfig.class })
 public class TofEngineServiceTest {
 
 	private static short LOCALE_ID = 34; 
 
 	@Autowired
-	TofEngineService tofEngineService;
+	private TofEngineService tofEngineService;
 //
 //	@Test
 	@Transactional

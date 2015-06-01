@@ -2,6 +2,7 @@ package lt.pap.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -29,9 +30,12 @@ public class TofCountryDesignation implements Serializable {
 	private TofDesText tofDesText;
 
 	//bi-directional many-to-one association to TofLanguage
-	@ManyToOne
-	@JoinColumn(name="CDS_LNG_ID", insertable=false, updatable=false)
-	private TofLanguage tofLanguage;
+//	@ManyToOne
+//	@JoinColumn(name="CDS_LNG_ID", insertable=false, updatable=false)
+//	private TofLanguage tofLanguage;
+	
+	@Column(name="CDS_LNG_ID", insertable=false, updatable=false)
+	private Short cdsLngId;
 
 //	//bi-directional many-to-one association to TofModel
 //	@ManyToOne
@@ -67,13 +71,21 @@ public class TofCountryDesignation implements Serializable {
 		this.tofDesText = tofDesText;
 	}
 
-	public TofLanguage getTofLanguage() {
-		return this.tofLanguage;
+	public Short getCdsLngId() {
+		return cdsLngId;
 	}
 
-	public void setTofLanguage(TofLanguage tofLanguage) {
-		this.tofLanguage = tofLanguage;
+	public void setCdsLngId(Short cdsLngId) {
+		this.cdsLngId = cdsLngId;
 	}
+
+//	public TofLanguage getTofLanguage() {
+//		return this.tofLanguage;
+//	}
+//
+//	public void setTofLanguage(TofLanguage tofLanguage) {
+//		this.tofLanguage = tofLanguage;
+//	}
 //
 //	public TofModel getTofModel() {
 //		return this.tofModel;
@@ -98,5 +110,7 @@ public class TofCountryDesignation implements Serializable {
 //	public void setTofType2(TofType tofType2) {
 //		this.tofType2 = tofType2;
 //	}
+	
+	
 
 }

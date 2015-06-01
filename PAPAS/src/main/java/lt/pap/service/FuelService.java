@@ -1,6 +1,9 @@
 package lt.pap.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.faces.model.SelectItem;
 
 import lt.pap.dao.FuelRepository;
 import lt.pap.model.Fuel;
@@ -27,4 +30,8 @@ public class FuelService
         return fuelRepository.findOne(id);
     }
     
+    public List<SelectItem> findFuelsForSelect(Short localeId) {
+    	return fuelRepository.findFuelsForSelect(localeId).stream().map( list -> 
+    		{ return new SelectItem((Integer)list[0], (String)list[1] ); } ).collect(Collectors.toList());
+    }
 }

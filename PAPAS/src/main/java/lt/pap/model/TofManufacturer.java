@@ -56,6 +56,7 @@ public class TofManufacturer implements Serializable {
 	private short mfaPcMfc;
 
 	//bi-directional many-to-one association to TofModel
+	
 	@OneToMany(mappedBy="tofManufacturer")
 	private List<TofModel> tofModels;
 

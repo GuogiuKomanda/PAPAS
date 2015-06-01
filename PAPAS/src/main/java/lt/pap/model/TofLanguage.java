@@ -35,8 +35,8 @@ public class TofLanguage implements Serializable {
 	private String lngIso2;
 
 	//bi-directional many-to-one association to TofCountryDesignation
-	@OneToMany(mappedBy="tofLanguage")
-	private List<TofCountryDesignation> tofCountryDesignations;
+//	@OneToMany(mappedBy="tofLanguage")
+//	private List<TofCountryDesignation> tofCountryDesignations;
 
 //	//bi-directional many-to-one association to TofDesignation
 //	@OneToMany(mappedBy="tofLanguage")
@@ -77,27 +77,27 @@ public class TofLanguage implements Serializable {
 		this.lngIso2 = lngIso2;
 	}
 
-	public List<TofCountryDesignation> getTofCountryDesignations() {
-		return this.tofCountryDesignations;
-	}
-
-	public void setTofCountryDesignations(List<TofCountryDesignation> tofCountryDesignations) {
-		this.tofCountryDesignations = tofCountryDesignations;
-	}
-
-	public TofCountryDesignation addTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
-		getTofCountryDesignations().add(tofCountryDesignation);
-		tofCountryDesignation.setTofLanguage(this);
-
-		return tofCountryDesignation;
-	}
-
-	public TofCountryDesignation removeTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
-		getTofCountryDesignations().remove(tofCountryDesignation);
-		tofCountryDesignation.setTofLanguage(null);
-
-		return tofCountryDesignation;
-	}
+//	public List<TofCountryDesignation> getTofCountryDesignations() {
+//		return this.tofCountryDesignations;
+//	}
+//
+//	public void setTofCountryDesignations(List<TofCountryDesignation> tofCountryDesignations) {
+//		this.tofCountryDesignations = tofCountryDesignations;
+//	}
+//
+//	public TofCountryDesignation addTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
+//		getTofCountryDesignations().add(tofCountryDesignation);
+//		tofCountryDesignation.setTofLanguage(this);
+//
+//		return tofCountryDesignation;
+//	}
+//
+//	public TofCountryDesignation removeTofCountryDesignation(TofCountryDesignation tofCountryDesignation) {
+//		getTofCountryDesignations().remove(tofCountryDesignation);
+//		tofCountryDesignation.setTofLanguage(null);
+//
+//		return tofCountryDesignation;
+//	}
 //
 //	public List<TofDesignation> getTofDesignations() {
 //		return this.tofDesignations;
