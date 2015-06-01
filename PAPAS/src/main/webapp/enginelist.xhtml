@@ -11,11 +11,20 @@
 </h:head>
 
 <h:form id="form">
+
+	<h:panelGrid columns="2">
+		<h:outputText value="Language:" />
+		<h:selectOneMenu value="#{sessionBean.localeString}">
+			<f:selectItems value="#{sessionBean.supportedLocales}" />
+			<f:ajax listener="#{engineListBean.reinit}" render="form" />
+		</h:selectOneMenu>
+	</h:panelGrid>
+
 	<h:panelGrid id="panel" columns="3" cellpadding="0">
 
-		<h:outputText value="Make" />
-		<h:outputText value="Model" />
-		<h:outputText value="Fuel type" />
+		<h:outputText value="#{msg['enginelist.make']}" />
+		<h:outputText value="#{msg['enginelist.model']}" />
+		<h:outputText value="#{msg['enginelist.fuel']}" />
 
 
 		<h:panelGroup id="makePanel">

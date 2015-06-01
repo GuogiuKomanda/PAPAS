@@ -6,12 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 
-import lt.pap.model.TofManufacturer;
 import lt.pap.model.WPart;
-import lt.pap.model.utils.Functions;
-import lt.pap.service.FuelService;
-import lt.pap.service.TofManufacturerService;
-import lt.pap.service.TofModelService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -42,7 +37,7 @@ public class EngineListBean {
   //  private WPartService wpartService;
     // manufacturer
     
-    private String selectedTofManufacturer = "";
+    private String selectedTofManufacturer = null;
 
     private List<SelectItem> availableTofManufacturerList;
 
@@ -62,7 +57,8 @@ public class EngineListBean {
     private void init() {
         availableTofManufacturerList = applicationBean.getAvailableManufacturers(session.getCountryId(),  session.getLocaleId());
         availableFuelList = applicationBean.getAvailableFuels( session.getCountryId(),  session.getLocaleId());
-
+        
+        updateTofModelList();
     }
 
     public void updateTofModelList() {
@@ -72,6 +68,11 @@ public class EngineListBean {
         } else {
           availableTofModelList = new ArrayList<SelectItem>();
         }
+    }
+    
+    public void reinit() {
+    	init();
+    	session.localeChanged();
     }
 
     public void updateFuelList() {

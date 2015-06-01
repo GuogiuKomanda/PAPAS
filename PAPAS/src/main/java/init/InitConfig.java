@@ -1,6 +1,7 @@
 package init;
 
 
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.naming.NamingException;
@@ -8,10 +9,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -20,6 +23,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
 @EnableTransactionManagement
@@ -72,5 +77,20 @@ public class InitConfig {
     transactionManager.setEntityManagerFactory(entityManagerFactory);
 
     return transactionManager;
+  }
+  
+  @Bean
+  public MessageSource messageSource() {
+      ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+      messageSource.setBasename("lt.pap.translation");
+      messageSource.setDefaultEncoding("UTF-8");
+      return messageSource;
+  }
+
+  @Bean(name = "localeResolver")
+  public LocaleResolver localeResolver() {
+      SessionLocaleResolver result = new SessionLocaleResolver();
+      result.setDefaultLocale(Locale.ENGLISH);
+      return result;
   }
 }

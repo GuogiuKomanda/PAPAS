@@ -24,10 +24,10 @@ public class ApplicationBean {
 	private static int EUROPE = 248;
 	
 	//supported locales
-	private static short GERMAN = 1;
-	private static short ENGLISH = 4;
-	private static short RUSSIAN = 16;
-	private static short LITHUANIAN = 34;
+	public static short GERMAN = 1;
+	public static short ENGLISH = 4;
+	public static short RUSSIAN = 16;
+	public static short LITHUANIAN = 34;
 
 	private Map<Short, String> supportedLocales = new TreeMap<Short, String>();
 	
