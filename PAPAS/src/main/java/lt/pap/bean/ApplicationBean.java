@@ -64,11 +64,11 @@ public class ApplicationBean {
 		availableManufacturersSelect = manufacturerService.findManufacturersForSelect();
 		
 		//load models
-//		for(SelectItem manufacturer : availableManufacturersSelect) {
-//			short mfaId = (Short)manufacturer.getValue();
-//			List<SelectItem> modelList = modelService.findModelsForSelect(mfaId, EUROPE, ENGLISH);
-//			availableManufacturerToModelSelect.put(mfaId, modelList);
-//		}
+		for(SelectItem manufacturer : availableManufacturersSelect) {
+			short mfaId = (Short)manufacturer.getValue();
+			List<SelectItem> modelList = modelService.findModelsForSelect(mfaId, EUROPE_ID, ENGLISH_ID);
+			availableManufacturerToModelSelect.put(mfaId, modelList);
+		}
 		
 		//load fuels for each locale
 		for(Locale locale : supportedLocales.keySet()) {
