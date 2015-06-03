@@ -1,0 +1,12 @@
+select#lngForm\:language-options option[value="de"] { 
+	background-image: url("#{resource['images/flags/de.png']}");	
+}
+select#lngForm\:language-options option[value="en"] { 
+	background-image: url("#{resource['images/flags/gb.png']}");	
+}
+select#lngForm\:language-options option[value="lt"] { 
+	background-image: url("#{resource['images/flags/lt.png']}");	
+}
+select#lngForm\:language-options option[value="ru"] { 
+	background-image: url("#{resource['images/flags/ru.png']}");	
+}

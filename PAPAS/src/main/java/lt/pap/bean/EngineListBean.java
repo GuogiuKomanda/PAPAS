@@ -12,130 +12,83 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-
-
 @Component("engineListBean")
 @Scope("session")
 public class EngineListBean {
-	
-    @Autowired
-    private SessionBean session;
-	
-//    @Autowired
-//    private TofManufacturerService manufacturerSercive;
-//
-//    @Autowired
-//    private TofModelService modelService;
-//
-//    @Autowired
-//    private FuelService fuelService;
-    
-    @Autowired
-    private ApplicationBean applicationBean;
 
-//    @Autowired
-  //  private WPartService wpartService;
-    // manufacturer
-    
-    private String selectedTofManufacturer = null;
+	@Autowired
+	private SessionBean session;
 
-    private List<SelectItem> availableTofManufacturerList;
+	//@Autowired
+	//private WPartService wpartService;
 
-    // model
-    private List<Integer> selectedTofModelList = new ArrayList<Integer>();
+	private String selectedTofManufacturer = null;
+	private List<Integer> selectedTofModelList = new ArrayList<Integer>();
+	private List<Integer> selectedFuelList = new ArrayList<Integer>();
 
-    private List<SelectItem> availableTofModelList;
+	private List<WPart> wpartList;
 
-    // fuel
-    private List<Integer> selectedFuelList= new ArrayList<Integer>();
+	@PostConstruct
+	public void init() {
 
-    private List<SelectItem> availableFuelList;
-    
-    private List<WPart> wpartList;
+	}
 
-    @PostConstruct
-    private void init() {
-        availableTofManufacturerList = applicationBean.getAvailableManufacturers(session.getCountryId(),  session.getLocaleId());
-        availableFuelList = applicationBean.getAvailableFuels( session.getCountryId(),  session.getLocaleId());
-        
-        updateTofModelList();
-    }
+	public void updateTofModelList() {
 
-    public void updateTofModelList() {
-        if (selectedTofManufacturer != null) {
-        	short mfaId = Short.parseShort(selectedTofManufacturer);
-        	availableTofModelList = applicationBean.getAvailableModels(mfaId, session.getCountryId(),  session.getLocaleId());
-        } else {
-          availableTofModelList = new ArrayList<SelectItem>();
-        }
-    }
-    
-    public void reinit() {
-    	init();
-    	session.localeChanged();
-    }
+	}
 
-    public void updateFuelList() {
+	public void updateFuelList() {
 
-    }
-    
-    public void doSearch(){
-        
+	}
 
-      //  wpartList = wpartService.findByFilters2(selectedTofManufacturer, selectedTofModelList, selectedFuelTypeList);
-    }
+	public void doSearch() {
+		// wpartList = wpartService.findByFilters2(selectedTofManufacturer,
+		// selectedTofModelList, selectedFuelTypeList);
+	}
 
+	public List<SelectItem> getAvailableTofManufacturerList() {
+		return session.getAvailableManufacturers();
+	}
 
+	public List<SelectItem> getAvailableTofModelList() {
+		if (selectedTofManufacturer != null) {
+			short mfaId = Short.parseShort(selectedTofManufacturer);
+			return session.getAvailableModels(mfaId);
+		} else {
+			return new ArrayList<SelectItem>();
+		}
+	}
 
-    public String getSelectedTofManufacturer() {
-        return selectedTofManufacturer;
-    }
+	public String getSelectedTofManufacturer() {
+		return selectedTofManufacturer;
+	}
 
-    public void setSelectedTofManufacturer(String selectedTofManufacturer) {
-        this.selectedTofManufacturer = selectedTofManufacturer;
-    }
+	public void setSelectedTofManufacturer(String selectedTofManufacturer) {
+		this.selectedTofManufacturer = selectedTofManufacturer;
+	}
 
-    public List<SelectItem> getAvailableTofManufacturerList() {
-        return availableTofManufacturerList;
-    }
+	public List<SelectItem> getAvailableFuelList() {
+		return session.getAvailableFuels();
+	}
 
-    public void setAvailableTofManufacturerList(List<SelectItem> availableTofManufacturerList) {
-        this.availableTofManufacturerList = availableTofManufacturerList;
-    }
+	public List<Integer> getSelectedTofModelList() {
+		return selectedTofModelList;
+	}
 
-    public List<Integer> getSelectedTofModelList() {
-        return selectedTofModelList;
-    }
+	public void setSelectedTofModelList(List<Integer> selectedTofModelList) {
+		this.selectedTofModelList = selectedTofModelList;
+	}
 
-    public void setSelectedTofModelList(List<Integer> selectedTofModelList) {
-        this.selectedTofModelList = selectedTofModelList;
-    }
+	public List<Integer> getSelectedFuelList() {
+		return selectedFuelList;
+	}
 
-    public List<SelectItem> getAvailableTofModelList() {
-        return availableTofModelList;
-    }
+	public void setSelectedFuelList(List<Integer> selectedFuelList) {
+		this.selectedFuelList = selectedFuelList;
+	}
 
-    public void setAvailableTofModelList(List<SelectItem> availableTofModelList) {
-        this.availableTofModelList = availableTofModelList;
-    }
+	public List<WPart> getWpartList() {
+		return wpartList;
+	}
 
-    public List<Integer> getSelectedFuelList() {
-        return selectedFuelList;
-    }
-
-    public void setSelectedFuelList(List<Integer> selectedFuelList) {
-        this.selectedFuelList = selectedFuelList;
-    }
-
-    public List<SelectItem> getAvailableFuelList() {
-        return availableFuelList;
-    }
-
-    public void setAvailableFuelList(List<SelectItem> availableFuelList) {
-        this.availableFuelList = availableFuelList;
-    }
-
-    public List<WPart> getWpartList() {
-        return wpartList;
-    }
 }

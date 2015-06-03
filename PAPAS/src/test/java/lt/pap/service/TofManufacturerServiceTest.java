@@ -19,10 +19,14 @@ public class TofManufacturerServiceTest {
 	@Autowired
 	private TofManufacturerService manufacturerService;
 
-	@Test
+//	@Test
 	public void test() {
 		List<SelectItem> items = manufacturerService.findManufacturersForSelect();
 		System.out.println(items.size());
 	}
 
+	@Test
+	public void test2() {
+
+	}
 }

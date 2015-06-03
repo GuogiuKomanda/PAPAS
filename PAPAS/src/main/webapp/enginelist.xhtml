@@ -1,25 +1,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:s="http://www.springframework.org/tags"
-	xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
 
 <h:head>
 	<h:outputScript name="jquery.js" />
 	<h:outputScript library="chosen" name="chosen.jquery.js" />
 	<h:outputScript library="chosen" name="chosen.proto.js" />
 	<h:outputStylesheet library="chosen" name="chosen.css" />
+
+	<h:outputScript library="chosenImage" name="chosenImage.jquery.js" />
+	<h:outputStylesheet library="chosenImage" name="chosenImage.css" />
+
+	<h:outputStylesheet library="css" name="lang.css" />
+
 </h:head>
 
+<!-- begin language switcher -->
+<h:form id="lngForm">
+
+	<h:selectOneMenu id="language-options"
+		value="#{sessionBean.localeString}" style="width:120px;">
+		<f:selectItems value="#{sessionBean.supportedLocales.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
+		<f:ajax listener="#{sessionBean.localeChanged}" render="form" />
+	</h:selectOneMenu>
+
+	<h:outputScript>
+	    jQuery("#lngForm\\:language-options").chosenImage({disable_search: true});
+	</h:outputScript>
+
+</h:form>
+<!-- end language switcher -->
+
+
+
 <h:form id="form">
-
-	<h:panelGrid columns="2">
-		<h:outputText value="Language:" />
-		<h:selectOneMenu value="#{sessionBean.localeString}">
-			<f:selectItems value="#{sessionBean.supportedLocales}" />
-			<f:ajax listener="#{engineListBean.reinit}" render="form" />
-		</h:selectOneMenu>
-	</h:panelGrid>
-
 	<h:panelGrid id="panel" columns="3" cellpadding="0">
 
 		<h:outputText value="#{msg['enginelist.make']}" />
@@ -28,12 +46,10 @@
 
 
 		<h:panelGroup id="makePanel">
-			<h:selectOneMenu id="makeSelect" value="#{engineListBean.selectedTofManufacturer}" style="width:350px;" styleClass="chosen-select">
-				<f:selectItem itemLabel="---" itemValue="#{null}" />
+			<h:selectOneMenu id="makeSelect" value="#{engineListBean.selectedTofManufacturer}"	style="width:350px;" styleClass="chosen-select">
+				<f:selectItem itemLabel="-" itemValue="#{null}" />
 				<f:selectItems value="#{engineListBean.availableTofManufacturerList}" />
-				<a4j:ajax listener="#{engineListBean.updateTofModelList}" execute="makeSelect" render="modelPanel"
-					onchange="jQuery('.chosen').trigger('chosen:updated');" />
-				<h:messages />
+				<a4j:ajax listener="#{engineListBean.updateTofModelList}" execute="makeSelect" render="modelPanel"/>
 			</h:selectOneMenu>
 			<h:outputScript>
                jQuery("#form\\:makeSelect").chosen({});
@@ -42,53 +58,47 @@
 
 
 		<h:panelGroup id="modelPanel">
-
-			<h:selectManyListbox id="modelSelect" value="#{engineListBean.selectedTofModelList}" style="width:350px;"
-				styleClass="chosen-select" multiple="true" tabindex="6" data-placeholder="Select models">
+			<h:selectManyListbox id="modelSelect" value="#{engineListBean.selectedTofModelList}" style="width:350px;" styleClass="chosen-select" 
+				multiple="true" data-placeholder="Select models">
 				<f:selectItems value="#{engineListBean.availableTofModelList}" />
 				<a4j:ajax listener="#{engineListBean.updateFuelList}" />
 			</h:selectManyListbox>
-
 			<h:outputScript>
                jQuery("#form\\:modelSelect").chosen({});
         	</h:outputScript>
-
 		</h:panelGroup>
 
 
-		<h:selectManyListbox id="fuelSelect" value="#{engineListBean.selectedFuelList}" style="width:350px;"
-			styleClass="chosen-select" multiple="true" tabindex="1" data-placeholder="Select fuel">
-			<f:selectItems value="#{engineListBean.availableFuelList}" />
-			<a4j:ajax listener="#{engineListBean.updateFuelList}" />
-		</h:selectManyListbox>
-
+		<h:panelGroup id="fuelPanel">
+			<h:selectManyListbox id="fuelSelect" value="#{engineListBean.selectedFuelList}" style="width:350px;" styleClass="chosen-select" multiple="true" data-placeholder="Select fuel">
+				<f:selectItems value="#{engineListBean.availableFuelList}" />
+				<a4j:ajax listener="#{engineListBean.updateFuelList}" />
+			</h:selectManyListbox>
 			<h:outputScript>
-               jQuery("#form\\:fuelSelect").chosen({});
-        	</h:outputScript>
+	        	jQuery("#form\\:fuelSelect").chosen({});
+	        </h:outputScript>
+        </h:panelGroup>
 
 
 	</h:panelGrid>
-	
-	<a4j:commandButton value="Search" render="resultsTable" execute="@form" action="#{engineListBean.doSearch}"/>
-	
+
+	<a4j:commandButton value="Search" render="resultsTable" execute="@form"	action="#{engineListBean.doSearch}" />
+
 	<rich:dataTable value="#{engineListBean.wpartList}" var="wp" id="resultsTable" rows="30">
 		<f:facet name="noData">
-	                Nothing found
-	            </f:facet>
-	
+	    	Nothing found
+	    </f:facet>
+
 		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="Make" />
 			</f:facet>
 			<h:outputText value="#{wp.status}" />
 		</rich:column>
-	
-	</rich:dataTable>
 
-	
+	</rich:dataTable>
 </h:form>
 <h:messages />
-
 
 
 </html>

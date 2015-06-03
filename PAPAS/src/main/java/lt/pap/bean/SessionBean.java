@@ -1,10 +1,11 @@
 package lt.pap.bean;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,11 +23,6 @@ public class SessionBean implements Serializable {
 
 	private int countryId = 186;
 	private short localeId = 4;
-	
-	private static String DE = "Deutsch";
-	private static String EN = "English";
-	private static String LT = "Lietuvi\u0173";
-	private static String RU = "\u0440\u0443\u0441\u0441\u043A\u0438\u0439";
 
 	public short getLocaleId() {
 		return localeId;
@@ -43,6 +39,9 @@ public class SessionBean implements Serializable {
 	public void setCountryId(int countryId) {
 		this.countryId = countryId;
 	}
+	
+    @Autowired
+    private ApplicationBean applicationBean;
 
 	@Autowired
 	private LocaleResolver localeResolver;
@@ -55,20 +54,13 @@ public class SessionBean implements Serializable {
 
 	private String localeString;
 
-	private Map<String, Locale> supportedLocales;
 
 	public SessionBean() {
-		supportedLocales = new LinkedHashMap<String, Locale>();
-		supportedLocales.put(DE, new Locale("de"));
-		supportedLocales.put(EN, Locale.ENGLISH);
-		supportedLocales.put(LT, new Locale("lt"));
-		supportedLocales.put(RU, new Locale("ru")); //russian
 
-		localeString = Locale.ENGLISH.getLanguage();
 	}
 
-	public Map<String, Locale> getSupportedLocales() {
-		return supportedLocales;
+	public Map<Locale, String> getSupportedLocales() {
+		return applicationBean.getSupportedLocales();
 	}
 
 	public String getLocaleString() {
@@ -77,17 +69,14 @@ public class SessionBean implements Serializable {
 
 	public void setLocaleString(String localeString) {
 		this.localeString = localeString;
-		if("de".equals(localeString)) localeId = ApplicationBean.GERMAN;
-		if("en".equals(localeString)) localeId = ApplicationBean.ENGLISH;
-		if("lt".equals(localeString)) localeId = ApplicationBean.LITHUANIAN;
-		if("ru".equals(localeString)) localeId = ApplicationBean.RUSSIAN;
+
 	}
 
 	public void localeChanged() {
 		
-		for (Map.Entry<String, Locale> entry : supportedLocales.entrySet()) {
-			if (entry.getValue().toString().equals(localeString)) {
-				Locale locale = entry.getValue();
+		for (Map.Entry<Locale, String> entry : getSupportedLocales().entrySet()) {
+			if (entry.getKey().toString().equals(localeString)) {
+				Locale locale = entry.getKey();
 
 				localeResolver.setLocale(request, response, locale);
 				LocaleContextHolder.setLocale(locale, true);
@@ -96,5 +85,19 @@ public class SessionBean implements Serializable {
 			}
 		}
 	}
+
+	public List<SelectItem> getAvailableManufacturers() {
+		return applicationBean.getAvailableManufacturers(countryId, localeId);
+	}
+
+	public List<SelectItem> getAvailableModels(short mfaId) {
+		return applicationBean.getAvailableModels(mfaId, countryId, localeId);
+	}
+
+	public List<SelectItem> getAvailableFuels() {
+		return applicationBean.getAvailableFuels(countryId, localeId);
+	}
+	
+	
 
 }

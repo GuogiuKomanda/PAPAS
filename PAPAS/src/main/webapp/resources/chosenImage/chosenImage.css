@@ -1,0 +1,17 @@
+/* DG - 29/11/12 - Align single item with results. General UI Imrpovement */
+.chosen-container-single .chosen-single {
+  padding: 0 0 0 10px;
+}
+
+/* DG - 03/12/12 -chosenImage - position, size and indent text */
+.chosenImage-container .chosen-results li,
+.chosenImage-container .chosen-single span {
+  background-position: 0px 45%;
+  background-size: auto 12px;
+  padding-left: 20px;
+}
+
+.chosenImage-container .chosen-single span {
+  background-position: 0px 45%;
+  padding-left: 20px;
+}

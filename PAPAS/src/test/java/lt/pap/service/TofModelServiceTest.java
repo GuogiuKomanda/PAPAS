@@ -19,10 +19,15 @@ public class TofModelServiceTest {
 	@Autowired
 	private TofModelService tofModelService;
 
-	@Test
+//	@Test
 	public void test() {
 		List<SelectItem> items = tofModelService.findModelsForSelect((short)511, 248, (short)4);
 		System.out.println(items.size());
 	}
 
+	
+	@Test
+	public void test2() {
+
+	}
 }
