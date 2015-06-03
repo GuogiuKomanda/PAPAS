@@ -94,7 +94,7 @@ public class ApplicationBean {
 		return localeToFuelSelect.get(localeId);
 	}
 	
-	private static Short localeStringToId(String localeString) {
+	public static Short localeStringToId(String localeString) {
 		switch (localeString) {
 		case "de":
 			return GERMAN_ID;

@@ -69,11 +69,10 @@ public class SessionBean implements Serializable {
 
 	public void setLocaleString(String localeString) {
 		this.localeString = localeString;
-
+		this.localeId = ApplicationBean.localeStringToId(localeString);
 	}
 
 	public void localeChanged() {
-		
 		for (Map.Entry<Locale, String> entry : getSupportedLocales().entrySet()) {
 			if (entry.getKey().toString().equals(localeString)) {
 				Locale locale = entry.getKey();
