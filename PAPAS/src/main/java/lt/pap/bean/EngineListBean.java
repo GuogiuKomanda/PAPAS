@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 
 import lt.pap.model.WPart;
+import lt.pap.service.WPartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,11 +20,11 @@ public class EngineListBean {
 	@Autowired
 	private SessionBean session;
 
-	//@Autowired
-	//private WPartService wpartService;
+	@Autowired
+	private WPartService wpartService;
 
-	private String selectedTofManufacturer = null;
-	private List<Integer> selectedTofModelList = new ArrayList<Integer>();
+	private Short selectedManufacturer = null;
+	private List<Integer> selectedModelList = new ArrayList<Integer>();
 	private List<Integer> selectedFuelList = new ArrayList<Integer>();
 
 	private List<WPart> wpartList;
@@ -33,7 +34,7 @@ public class EngineListBean {
 
 	}
 
-	public void updateTofModelList() {
+	public void updateModelList() {
 
 	}
 
@@ -42,41 +43,41 @@ public class EngineListBean {
 	}
 
 	public void doSearch() {
-		// wpartList = wpartService.findByFilters2(selectedTofManufacturer,
-		// selectedTofModelList, selectedFuelTypeList);
+		// wpartList = wpartService.findByFilters2(selectedManufacturer,
+		// selectedModelList, selectedFuelTypeList);
 	}
 
-	public List<SelectItem> getAvailableTofManufacturerList() {
+	public List<SelectItem> getAvailableManufacturerList() {
 		return session.getAvailableManufacturers();
 	}
 
-	public List<SelectItem> getAvailableTofModelList() {
-		if (selectedTofManufacturer != null) {
-			short mfaId = Short.parseShort(selectedTofManufacturer);
+	public List<SelectItem> getAvailableModelList() {
+		if (selectedManufacturer != null) {
+			short mfaId = selectedManufacturer;
 			return session.getAvailableModels(mfaId);
 		} else {
 			return new ArrayList<SelectItem>();
 		}
 	}
-
-	public String getSelectedTofManufacturer() {
-		return selectedTofManufacturer;
-	}
-
-	public void setSelectedTofManufacturer(String selectedTofManufacturer) {
-		this.selectedTofManufacturer = selectedTofManufacturer;
-	}
-
+	
 	public List<SelectItem> getAvailableFuelList() {
 		return session.getAvailableFuels();
 	}
 
-	public List<Integer> getSelectedTofModelList() {
-		return selectedTofModelList;
+	public Short getSelectedManufacturer() {
+		return selectedManufacturer;
 	}
 
-	public void setSelectedTofModelList(List<Integer> selectedTofModelList) {
-		this.selectedTofModelList = selectedTofModelList;
+	public void setSelectedManufacturer(Short selectedManufacturer) {
+		this.selectedManufacturer = selectedManufacturer;
+	}
+
+	public List<Integer> getSelectedModelList() {
+		return selectedModelList;
+	}
+
+	public void setSelectedModelList(List<Integer> selectedModelList) {
+		this.selectedModelList = selectedModelList;
 	}
 
 	public List<Integer> getSelectedFuelList() {

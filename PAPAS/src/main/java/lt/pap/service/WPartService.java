@@ -13,20 +13,21 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class WPartService {
-  @Autowired
-  private WPartRepository WPartRepository;
+	@Autowired
+	private WPartRepository WPartRepository;
 
-public List<WPart> findAll()
-{
-    return WPartRepository.findAll();
-}
+	public List<WPart> findAll() {
+		return WPartRepository.findAll();
+	}
 
-public WPart findOne(Integer id)
-{
-    return WPartRepository.findOne(id);
-}  
-  
-  
+	public WPart findOne(Integer id) {
+		return WPartRepository.findOne(id);
+	}
+
+	public <S extends WPart> S save(S entity) {
+		return WPartRepository.save(entity);
+	}
+
 }
 /*package lt.pap.service;
 

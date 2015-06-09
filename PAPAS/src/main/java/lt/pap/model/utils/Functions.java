@@ -1,5 +1,6 @@
 package lt.pap.model.utils;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,17 @@ public class Functions {
 				items.add(sig);
 			}
 
+		}
+		return items;
+	}
+	
+	public static List<SelectItem> yearsAsSelectItems(int from, int to) {
+		List<SelectItem> items = new ArrayList<SelectItem>();
+		for(int i = from; i <= to; i++) {
+			SelectItem item = new SelectItem();
+			item.setValue(Year.of(i));
+			item.setLabel(""+i);
+			items.add(item);
 		}
 		return items;
 	}

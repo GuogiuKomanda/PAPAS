@@ -9,6 +9,8 @@ import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lt.pap.service.TofEngineService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -42,6 +44,9 @@ public class SessionBean implements Serializable {
 	
     @Autowired
     private ApplicationBean applicationBean;
+    
+    @Autowired
+    private TofEngineService engineService;
 
 	@Autowired
 	private LocaleResolver localeResolver;
@@ -95,6 +100,10 @@ public class SessionBean implements Serializable {
 
 	public List<SelectItem> getAvailableFuels() {
 		return applicationBean.getAvailableFuels(countryId, localeId);
+	}
+
+	public List<SelectItem> getAvailableEngineCodes(Integer modelId) {
+		return engineService.findEngineCodesForSelect(modelId);
 	}
 	
 	

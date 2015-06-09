@@ -43,14 +43,12 @@ public class WPart {
 
     @Column(name = "status", nullable = false, length = 20)
     private String status;
+
+    @Column(name="TYP_ID")
+    private Integer type;
     
-    @ManyToOne
-    @JoinColumn(name="TYP_ID")
-    private TofType tofType;
-    
-    @ManyToOne
-    @JoinColumn(name="ENG_ID")
-    private TofEngine tofEngine;
+    @Column(name="ENG_ID")
+    private Integer engine;
     
     
 
@@ -58,11 +56,11 @@ public class WPart {
     {
         return wpartid;
     }
-
-    public void setWpartid(Integer wpartid)
-    {
-        this.wpartid = wpartid;
-    }
+//
+//    public void setWpartid(Integer wpartid)
+//    {
+//        this.wpartid = wpartid;
+//    }
 
     public Year getYear()
     {
@@ -124,25 +122,41 @@ public class WPart {
         this.price2 = price2;
     }
 
-    public TofType getTofType()
-    {
-        return tofType;
-    }
+	public Integer getType() {
+		return type;
+	}
 
-    public void setTofType(TofType tofType)
-    {
-        this.tofType = tofType;
-    }
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
-    public TofEngine getTofEngine()
-    {
-        return tofEngine;
-    }
+	public Integer getEngine() {
+		return engine;
+	}
 
-    public void setTofEngine(TofEngine tofEngine)
-    {
-        this.tofEngine = tofEngine;
-    }
+	public void setEngine(Integer engine) {
+		this.engine = engine;
+	}
+
+//    public TofType getTofType()
+//    {
+//        return tofType;
+//    }
+//
+//    public void setTofType(TofType tofType)
+//    {
+//        this.tofType = tofType;
+//    }
+//
+//    public TofEngine getTofEngine()
+//    {
+//        return tofEngine;
+//    }
+//
+//    public void setTofEngine(TofEngine tofEngine)
+//    {
+//        this.tofEngine = tofEngine;
+//    }
     
    
 

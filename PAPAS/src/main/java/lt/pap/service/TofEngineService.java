@@ -1,6 +1,9 @@
 package lt.pap.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.faces.model.SelectItem;
 
 import lt.pap.dao.TofEngineRepository;
 import lt.pap.model.TofEngine;
@@ -38,15 +41,22 @@ public class TofEngineService {
 	public TofEngine save(TofEngine engine) {
 		return tofEngineRepository.save(engine);
 	}
-	
-	private void loadDesignations(List<TofEngine> engineList, short localeId){
-		for(TofEngine engine : engineList) {
-			loadDesignation(engine, localeId);
-		}
-	}
 
-	private void loadDesignation(TofEngine engine, short localeId){
-		String engKvEngineString = tofDesignationService.getDesignationString(engine.getEngKvEngineDesId(), localeId);
-		engine.setEngKvEngineString(engKvEngineString);
+	public List<SelectItem> findEngineCodesForSelect(Integer modelId) {
+		return tofEngineRepository.findEngineCodesForSelect(modelId).stream().map( list -> 
+		{ return new SelectItem((Integer)list[0], (String)list[1] ); } ).collect(Collectors.toList());
 	}
+	
+//	private void loadDesignations(List<TofEngine> engineList, short localeId){
+//		for(TofEngine engine : engineList) {
+//			loadDesignation(engine, localeId);
+//		}
+//	}
+//
+//	private void loadDesignation(TofEngine engine, short localeId){
+//		String engKvEngineString = tofDesignationService.getDesignationString(engine.getEngKvEngineDesId(), localeId);
+//		engine.setEngKvEngineString(engKvEngineString);
+//	}
+	
+	
 }
