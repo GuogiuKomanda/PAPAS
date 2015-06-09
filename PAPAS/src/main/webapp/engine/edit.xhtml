@@ -55,13 +55,13 @@
 		
 		<h:outputText value="#{msg['engine.edit.year']}" />
 
-		<h:panelGroup id="codePanel">
-			<h:selectOneMenu id="codeSelect" value="#{engineEditBean.year}" style="width:350px;" styleClass="chosen-select">
+		<h:panelGroup id="yearPanel">
+			<h:selectOneMenu id="yearSelect" value="#{engineEditBean.year}" style="width:350px;" styleClass="chosen-select">
 				<f:selectItem itemLabel="" itemValue="#{null}" />
 				<f:selectItems value="#{engineEditBean.availableYearsList}" />
 			</h:selectOneMenu>
 			<h:outputScript>
-               jQuery("#form\\:codeSelect").chosen({});
+               jQuery("#form\\:yearSelect").chosen({});
         	</h:outputScript>
 		</h:panelGroup>
 
