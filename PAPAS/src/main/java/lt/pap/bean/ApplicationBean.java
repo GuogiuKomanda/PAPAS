@@ -1,5 +1,6 @@
 package lt.pap.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -20,8 +21,13 @@ import org.springframework.stereotype.Component;
 
 @Component("applicationBean")
 @Scope("singleton")
-public class ApplicationBean {
+public class ApplicationBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2787365288630357385L;
+
 	//country
 	private static int EUROPE_ID = 248;
 	

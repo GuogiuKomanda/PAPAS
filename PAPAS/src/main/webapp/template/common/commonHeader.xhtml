@@ -18,7 +18,7 @@
 				value="#{sessionBean.localeString}" style="width:120px;">
 				<f:selectItems value="#{sessionBean.supportedLocales.entrySet()}"
 					var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
-				<f:ajax listener="#{sessionBean.localeChanged}" render="form" />
+				<f:ajax listener="#{sessionBean.localeChanged}" render=":content" />
 			</h:selectOneMenu>
 
 			<h:outputScript>

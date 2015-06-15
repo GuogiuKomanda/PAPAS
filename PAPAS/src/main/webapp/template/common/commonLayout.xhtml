@@ -20,28 +20,28 @@
 	</h:head>
     
     <h:body>
+    
+	<h:panelGroup layout="block" id="page">
 
-	<div id="page">
-		
-		<div id="header">
+		<h:panelGroup layout="block" id="header">
 			<ui:insert name="header" >
 				<ui:include src="/template/common/commonHeader.xhtml" />
 			</ui:insert>
-	    </div>
+	    </h:panelGroup>
 	    
-	    <div id="content">
+	    <h:panelGroup layout="block" id="content">
 		   	<ui:insert name="content" >
 		   		<ui:include src="/template/common/commonContent.xhtml" />
 		   	</ui:insert>
-	    </div>
+	    </h:panelGroup>
 		    
-	    <div id="footer">
+	    <h:panelGroup layout="block" id="footer">
 	    	<ui:insert name="footer" >
 	    		<ui:include src="/template/common/commonFooter.xhtml" />
 	    	</ui:insert>
-    	</div>
+    	</h:panelGroup>
     	
-    </div>
+	</h:panelGroup>
     
     </h:body>
 
