@@ -1,5 +1,6 @@
 package lt.pap.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,12 @@ import org.springframework.stereotype.Component;
 
 @Component("engineListBean")
 @Scope("session")
-public class EngineListBean {
+public class EngineListBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8405718332067019644L;
 
 	@Autowired
 	private SessionBean session;

@@ -92,7 +92,7 @@ public class SpringDataConfig {
 	@Bean(name = "localeResolver")
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver result = new SessionLocaleResolver();
-		result.setDefaultLocale(Locale.ENGLISH);
+		result.setDefaultLocale(new Locale("en"));
 		return result;
 	}
 

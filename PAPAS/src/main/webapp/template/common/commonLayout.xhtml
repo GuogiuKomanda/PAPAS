@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       >
@@ -11,38 +9,33 @@
 		<h:outputScript library="chosen" name="chosen.jquery.js" />
 		<h:outputScript library="chosen" name="chosen.proto.js" />
 		<h:outputStylesheet library="chosen" name="chosen.css" />
-	
-		<h:outputScript library="chosenImage" name="chosenImage.jquery.js" />
-		<h:outputStylesheet library="chosenImage" name="chosenImage.css" />
+		
+		<h:outputScript library="imageSelect" name="ImageSelect.jquery.js" />
+		<h:outputStylesheet library="imageSelect" name="ImageSelect.css" />
 	
 		<h:outputStylesheet library="css" name="lang.css" />
-	
 	</h:head>
     
     <h:body>
-    
-	<h:panelGroup layout="block" id="page">
-
-		<h:panelGroup layout="block" id="header">
-			<ui:insert name="header" >
-				<ui:include src="/template/common/commonHeader.xhtml" />
-			</ui:insert>
-	    </h:panelGroup>
-	    
-	    <h:panelGroup layout="block" id="content">
-		   	<ui:insert name="content" >
-		   		<ui:include src="/template/common/commonContent.xhtml" />
-		   	</ui:insert>
-	    </h:panelGroup>
+		<h:panelGroup layout="block" id="page">
+	
+			<h:panelGroup layout="block" id="header">
+				<ui:insert name="header" >
+					<ui:include src="/template/common/commonHeader.xhtml" />
+				</ui:insert>
+		    </h:panelGroup>
 		    
-	    <h:panelGroup layout="block" id="footer">
-	    	<ui:insert name="footer" >
-	    		<ui:include src="/template/common/commonFooter.xhtml" />
-	    	</ui:insert>
-    	</h:panelGroup>
-    	
-	</h:panelGroup>
-    
+		    <h:panelGroup layout="block" id="mainPage">
+			   	<ui:insert name="content" >
+			   		<ui:include src="/template/common/commonContent.xhtml" />
+			   	</ui:insert>
+		    </h:panelGroup>
+			    
+		    <h:panelGroup layout="block" id="footer">
+		    	<ui:insert name="footer" >
+		    		<ui:include src="/template/common/commonFooter.xhtml" />
+		    	</ui:insert>
+	    	</h:panelGroup>
+		</h:panelGroup>
     </h:body>
-
-</html>
+</h:html>

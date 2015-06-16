@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<h:html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 
-<h:form id="form">
+<h:form id="mainForm">
 	<h:panelGrid id="panel" columns="3" cellpadding="0">
 
 		<h:outputText value="#{msg['engine.list.make']}" />
@@ -17,11 +17,11 @@
 		<h:panelGroup id="makePanel">
 			<h:selectOneMenu id="makeSelect" value="#{engineListBean.selectedManufacturer}"	style="width:350px;" styleClass="chosen-select">
 				<f:selectItem itemLabel="-" itemValue="#{null}" />
-				<f:selectItems value="#{engineListBean.availableManufacturerList}" />
-				<a4j:ajax listener="#{engineListBean.updateModelList}" execute="makeSelect" render="modelPanel"/>
+				<f:selectItems value="#{engineListBean.availableManufacturerList}"/>
+				<f:ajax listener="#{engineListBean.updateModelList}" render="modelPanel" execute="makeSelect"/>
 			</h:selectOneMenu>
 			<h:outputScript>
-               jQuery("#form\\:makeSelect").chosen({});
+               jQuery("#mainForm\\:makeSelect").chosen({});
         	</h:outputScript>
 		</h:panelGroup>
 
@@ -30,10 +30,10 @@
 			<h:selectManyListbox id="modelSelect" value="#{engineListBean.selectedModelList}" style="width:350px;" styleClass="chosen-select" 
 				multiple="true" data-placeholder="Select models">
 				<f:selectItems value="#{engineListBean.availableModelList}" />
-				<a4j:ajax listener="#{engineListBean.updateFuelList}" />
+				<f:ajax listener="#{engineListBean.updateFuelList}" />
 			</h:selectManyListbox>
 			<h:outputScript>
-               jQuery("#form\\:modelSelect").chosen({});
+               jQuery("#mainForm\\:modelSelect").chosen({});
         	</h:outputScript>
 		</h:panelGroup>
 
@@ -41,10 +41,10 @@
 		<h:panelGroup id="fuelPanel">
 			<h:selectManyListbox id="fuelSelect" value="#{engineListBean.selectedFuelList}" style="width:350px;" styleClass="chosen-select" multiple="true" data-placeholder="Select fuel">
 				<f:selectItems value="#{engineListBean.availableFuelList}" />
-				<a4j:ajax listener="#{engineListBean.updateFuelList}" />
+				<f:ajax listener="#{engineListBean.updateFuelList}" />
 			</h:selectManyListbox>
 			<h:outputScript>
-	        	jQuery("#form\\:fuelSelect").chosen({});
+	        	jQuery("#mainForm\\:fuelSelect").chosen({});
 	        </h:outputScript>
         </h:panelGroup>
 
@@ -66,8 +66,9 @@
 		</rich:column>
 
 	</rich:dataTable>
+	
 </h:form>
 <h:messages />
 
 
-</html>
+</h:html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<h:html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 
-<h:form id="form">
+<h:form id="mainForm">
 	<h:panelGrid id="panel" columns="2" cellpadding="0">
 
 		<h:outputText value="#{msg['engine.edit.make']}" />
@@ -15,10 +15,10 @@
 			<h:selectOneMenu id="makeSelect" value="#{engineEditBean.manufacturer}"	style="width:350px;" styleClass="chosen-select">
 				<f:selectItem itemLabel="" itemValue="#{null}" />
 				<f:selectItems value="#{engineEditBean.availableManufacturerList}" />
-				<a4j:ajax listener="#{engineEditBean.updateModelList}" execute="@this" render="modelPanel"/>
+				<a4j:ajax listener="#{engineEditBean.updateModelList}" execute="makePanel" render="modelPanel"/>
 			</h:selectOneMenu>
 			<h:outputScript>
-               jQuery("#form\\:makeSelect").chosen({});
+               jQuery("#mainForm\\:makeSelect").chosen({});
         	</h:outputScript>
 		</h:panelGroup>
 		
@@ -32,7 +32,7 @@
 				<a4j:ajax listener="#{engineEditBean.updateCodeList}" execute="@this" render="codePanel"/>
 			</h:selectOneMenu>
 			<h:outputScript>
-               jQuery("#form\\:modelSelect").chosen({});
+               jQuery("#mainForm\\:modelSelect").chosen({});
         	</h:outputScript>
 		</h:panelGroup>
 
@@ -44,7 +44,7 @@
 				<f:selectItems value="#{engineEditBean.availableEngineCodesList}" />
 			</h:selectOneMenu>
 			<h:outputScript>
-               jQuery("#form\\:codeSelect").chosen({});
+               jQuery("#mainForm\\:codeSelect").chosen({});
         	</h:outputScript>
 		</h:panelGroup>
 		
@@ -61,7 +61,7 @@
 				<f:selectItems value="#{engineEditBean.availableYearsList}" />
 			</h:selectOneMenu>
 			<h:outputScript>
-               jQuery("#form\\:yearSelect").chosen({});
+               jQuery("#mainForm\\:yearSelect").chosen({});
         	</h:outputScript>
 		</h:panelGroup>
 
@@ -73,4 +73,4 @@
 <h:messages />
 
 
-</html>
+</h:html>
