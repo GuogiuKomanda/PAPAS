@@ -6,20 +6,19 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter(autoApply = true)
-public class YearConverter implements
-        AttributeConverter<Year, String> {
+public class YearConverter implements AttributeConverter<Year, Integer> {
 
     @Override
-    public String convertToDatabaseColumn(Year entityValue) {
+    public Integer convertToDatabaseColumn(Year entityValue) {
         if (entityValue == null)
             return null;
-        return entityValue.toString();
+        return entityValue.getValue();
     }
 
     @Override
-    public Year convertToEntityAttribute(String databaseValue) {
+    public Year convertToEntityAttribute(Integer databaseValue) {
         if (databaseValue == null)
             return null;
-        return Year.parse(databaseValue);
+        return Year.of(databaseValue);
     }
 }
