@@ -49,8 +49,7 @@ public class EngineListBean implements Serializable {
 	}
 
 	public void doSearch() {
-		// wpartList = wpartService.findByFilters2(selectedManufacturer,
-		// selectedModelList, selectedFuelTypeList);
+		 wpartList = wpartService.findAll();
 	}
 
 	public List<SelectItem> getAvailableManufacturerList() {

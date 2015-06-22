@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lt.pap.converter.YearConverter;
@@ -17,7 +15,7 @@ import lt.pap.converter.YearConverter;
 
 
 @Entity
-@Table(name = "WPart")
+@Table(name = "wpart")
 public class WPart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -25,7 +23,7 @@ public class WPart {
     private Integer wpartid;
 
 
-    @Column(name = "LOCATION", nullable = false, length = 20)
+    @Column(name = "LOCATION", nullable = false, length = 50)
     private String location;
     
     @Column(name = "PRICE1", nullable =false)
@@ -38,11 +36,13 @@ public class WPart {
     @Convert(converter = YearConverter.class)
     private Year year;
 
-    @Column(name = "fullcode", nullable = false, length = 40)
+    @Column(name = "fullcode", nullable = false, length = 50)
     private String fullCode;
 
-    @Column(name = "status", nullable = false, length = 20)
-    private String status;
+   
+   
+    @Column(name = "DSTATUS", nullable = false, length = 50)
+   private String dstatus;
 
     @Column(name="TYP_ID")
     private Integer type;
@@ -82,16 +82,7 @@ public class WPart {
         this.fullCode = fullCode;
     }
 
-    public String getStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(String status)
-    {
-        this.status = status;
-    }
-
+   
     public String getLocation()
     {
         return location;
@@ -137,6 +128,23 @@ public class WPart {
 	public void setEngine(Integer engine) {
 		this.engine = engine;
 	}
+
+ 
+
+    public void setWpartid(Integer wpartid)
+    {
+        this.wpartid = wpartid;
+    }
+
+//    public String getDstatus()
+//    {
+//        return dstatus;
+//    }
+//
+//    public void setDstatus(String dstatus)
+//    {
+//        this.dstatus = dstatus;
+//    }
 
 //    public TofType getTofType()
 //    {

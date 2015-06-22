@@ -53,7 +53,7 @@ public class EngineEditBean {
 		part.setEngine(engineId);
 		part.setFullCode(engineCodeFull);
 		part.setLocation("xxx");
-		part.setStatus("new");
+		//part.setDstatus("dstatus");
 		part.setYear(year);
 		wpartService.save(part);
 		// selectedModelList, selectedFuelTypeList);
