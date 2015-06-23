@@ -44,7 +44,8 @@ public class Functions {
 		List<SelectItem> items = new ArrayList<SelectItem>();
 		for(int i = from; i <= to; i++) {
 			SelectItem item = new SelectItem();
-			item.setValue(Year.of(i));
+			//item.setValue(Year.of(i));
+			item.setValue(""+i);
 			item.setLabel(""+i);
 			items.add(item);
 		}

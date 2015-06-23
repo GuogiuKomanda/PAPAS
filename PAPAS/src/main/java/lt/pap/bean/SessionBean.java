@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lt.pap.service.TofEngineService;
+import lt.pap.service.TofTypeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,7 +24,7 @@ public class SessionBean implements Serializable {
 
 	private static final long serialVersionUID = 3729328103103002629L;
 
-	private int countryId = 186;
+	private int countryId = 248;
 	private short localeId = 4;
 
 	public short getLocaleId() {
@@ -47,6 +48,9 @@ public class SessionBean implements Serializable {
     
     @Autowired
     private TofEngineService engineService;
+    
+    @Autowired
+    private TofTypeService typeService;
 
 	@Autowired
 	private LocaleResolver localeResolver;
@@ -106,6 +110,8 @@ public class SessionBean implements Serializable {
 		return engineService.findEngineCodesForSelect(modelId);
 	}
 	
-	
+	public List<SelectItem> getAvailableTypes(Integer modelId, Integer engineId) {
+		return typeService.findTypForSelect(modelId, engineId, countryId, (short)4); //locale 4 - english name
+	}
 
 }

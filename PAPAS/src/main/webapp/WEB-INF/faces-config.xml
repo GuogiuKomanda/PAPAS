@@ -6,8 +6,15 @@
 	version="2.2">
 
 	<application>
-		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
-
+        <render-kit>
+            <renderer>
+                <component-family>javax.faces.Input</component-family>
+                <renderer-type>javax.faces.File</renderer-type>
+                <renderer-class>jsf.upload.MultipleFileRenderer</renderer-class>
+            </renderer>
+        </render-kit>
+        
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
 	
 </faces-config>
