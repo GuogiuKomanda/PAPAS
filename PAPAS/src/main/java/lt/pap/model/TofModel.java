@@ -51,7 +51,7 @@ public class TofModel implements Serializable {
 	private Integer modPconStart;
 	
 	@Column(name="MOD_CDS_ID") //va su situo
-    private Integer ModCdsId;
+    private Integer modCdsId;
 	
 //	@ManyToOne
 //	@JoinColumn(name="MOD_CDS_ID")
@@ -190,12 +190,12 @@ public class TofModel implements Serializable {
 
     public Integer getModCdsId()
     {
-        return ModCdsId;
+        return modCdsId;
     }
 
-    public void setModCdsId(Integer modCdsId)
+    public void setModuCdsId(Integer modCdsId)
     {
-        ModCdsId = modCdsId;
+        this.modCdsId = modCdsId;
     }
 
     public String getModString()

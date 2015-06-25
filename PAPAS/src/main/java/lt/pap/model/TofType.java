@@ -2,6 +2,7 @@ package lt.pap.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.Transient;
@@ -88,10 +90,10 @@ public class TofType implements Serializable {
 
 
 	@Column(name="TYP_PCON_END")
-	private int typPconEnd;
+	private Integer typPconEnd;
 
 	@Column(name="TYP_PCON_START")
-	private int typPconStart;
+	private Integer typPconStart;
 
 
 
@@ -100,6 +102,9 @@ public class TofType implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="TYP_MOD_ID")
 	private TofModel tofModel;
+	
+	@OneToMany(mappedBy="tofType")
+    private List<WPart> wPart;
 
 	public TofType() {
 	}
@@ -168,21 +173,21 @@ public class TofType implements Serializable {
 
 	
 	
-	public int getTypPconEnd() {
-		return this.typPconEnd;
-	}
+//	public int getTypPconEnd() {
+	//	return this.typPconEnd;
+	//}
 
-	public void setTypPconEnd(int typPconEnd) {
-		this.typPconEnd = typPconEnd;
-	}
+//	public void setTypPconEnd(int typPconEnd) {
+//		this.typPconEnd = typPconEnd;
+	//}
 
-	public int getTypPconStart() {
-		return this.typPconStart;
-	}
+//	public int getTypPconStart() {
+	//	return this.typPconStart;
+	//}
 
-	public void setTypPconStart(int typPconStart) {
-		this.typPconStart = typPconStart;
-	}
+//	public void setTypPconStart(int typPconStart) {
+	//	this.typPconStart = typPconStart;
+//	}
 
 
 	public TofModel getTofModel() {
@@ -192,5 +197,88 @@ public class TofType implements Serializable {
 	public void setTofModel(TofModel tofModel) {
 		this.tofModel = tofModel;
 	}
+
+    public Integer getTypCdsId()
+    {
+        return typCdsId;
+    }
+
+    public void setTypCdsId(Integer typCdsId)
+    {
+        this.typCdsId = typCdsId;
+    }
+
+    public Integer getTypMmtCdsId()
+    {
+        return typMmtCdsId;
+    }
+
+    public void setTypMmtCdsId(Integer typMmtCdsId)
+    {
+        this.typMmtCdsId = typMmtCdsId;
+    }
+
+    /**
+     * @return the typKvFuelDesId
+     */
+    public Integer getTypKvFuelDesId()
+    {
+        return typKvFuelDesId;
+    }
+
+    /**
+     * @param typKvFuelDesId the typKvFuelDesId to set
+     */
+    public void setTypKvFuelDesId(Integer typKvFuelDesId)
+    {
+        this.typKvFuelDesId = typKvFuelDesId;
+    }
+
+    /**
+     * @return the typKvBodyDesId
+     */
+    public Integer getTypKvBodyDesId()
+    {
+        return typKvBodyDesId;
+    }
+
+    /**
+     * @param typKvBodyDesId the typKvBodyDesId to set
+     */
+    public void setTypKvBodyDesId(Integer typKvBodyDesId)
+    {
+        this.typKvBodyDesId = typKvBodyDesId;
+    }
+
+    /**
+     * @return the typPconEnd
+     */
+    public Integer getTypPconEnd()
+    {
+        return typPconEnd;
+    }
+
+    /**
+     * @param typPconEnd the typPconEnd to set
+     */
+    public void setTypPconEnd(Integer typPconEnd)
+    {
+        this.typPconEnd = typPconEnd;
+    }
+
+    /**
+     * @return the typPconStart
+     */
+    public Integer getTypPconStart()
+    {
+        return typPconStart;
+    }
+    /**
+     * @param typPconStart the typPconStart to set
+     */
+    public void setTypPconStart(Integer typPconStart)
+    {
+        this.typPconStart = typPconStart;
+    }
 
 }

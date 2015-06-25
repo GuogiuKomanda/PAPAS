@@ -58,12 +58,81 @@
 	    	Nothing found
 	    </f:facet>
 
-		<rich:column>
+  <rich:column>
 			<f:facet name="header">
 				<h:outputText value="Make" />
 			</f:facet>
-			<h:outputText value="#{wp.status}" />
+			<h:outputText value="#{wp.tofType.tofModel.tofManufacturer.mfaBrand}" />
 		</rich:column>
+
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Model CDS Id" />
+			</f:facet>
+			<h:outputText value="#{wp.tofType.tofModel.modCdsId}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Type cds id" />
+			</f:facet>
+			<h:outputText value="#{wp.tofType.typCdsId}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Engine code" />
+			</f:facet>
+			<h:outputText value="#{wp.tofEngine.engCode" />
+		</rich:column>
+		
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Fuel des id" />
+			</f:facet>
+			<h:outputText value="#{wp.tofType.typKvFuelDesId}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="CCM" />
+			</f:facet>
+			<h:outputText value="#{wp.tofType.typCcm}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="KW" />
+			</f:facet>
+			<h:outputText value="#{wp.tofType.typKwFrom}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Type start Year" />
+			</f:facet>
+			<h:outputText value="#{wp.tofType.typPconStart}" />
+		</rich:column>
+		
+		<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Type end Year" />
+			</f:facet>
+			<h:outputText value="#{wp.tofType.typPconEnd}" />
+		</rich:column>
+		
+<rich:column>
+			<f:facet name="header">
+				<h:outputText value="Part Year" />
+			</f:facet>
+			<h:outputText value="#{wp.year}" />
+		</rich:column>
+
+
+
+		
+		
 
 	</rich:dataTable>
 	

@@ -16,6 +16,8 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.Part;
 
+import lt.pap.model.TofEngine;
+import lt.pap.model.TofType;
 import lt.pap.model.WPart;
 import lt.pap.model.utils.Functions;
 import lt.pap.service.WPartService;
@@ -37,10 +39,10 @@ public class EngineEditBean {
 	private Short manufacturer;
 	
 	private Integer model;
+	private Integer  engineId;
+	private TofEngine engine;
 	
-	private Integer engineId;
-	
-	private Integer type;
+	private TofType type;
 	
 	private String engineCodeFull;
 	
@@ -59,7 +61,7 @@ public class EngineEditBean {
 	}
 
 	public void updateCodeList() {
-		engineId = null;
+		engine = null;
 		updateTypeList();
 	}
 	
@@ -70,9 +72,9 @@ public class EngineEditBean {
 	public void doSave() {
 		
 		WPart part = new WPart();
-		part.setEngine(engineId);
+		part.setEngine(engine);
 		part.setFullCode(engineCodeFull);
-		part.setType(type);
+		part.setTofType(type);
 		part.setLocation("xxx");
 		//part.setDstatus("dstatus");
 //		part.setYear(year);
@@ -101,8 +103,8 @@ public class EngineEditBean {
 	}
 	
 	public List<SelectItem> getAvailableTypesList() {
-		if (model != null && engineId != null) {
-			return session.getAvailableTypes(model, engineId);
+		if (model != null && engine != null) {
+			return session.getAvailableTypes(model, engine.getEngId());
 		} else {
 			return new ArrayList<SelectItem>();
 		}
@@ -136,11 +138,11 @@ public class EngineEditBean {
 		this.engineId = engineId;
 	}
 
-	public Integer getType() {
+	public TofType getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setTofType(TofType type) {
 		this.type = type;
 	}
 

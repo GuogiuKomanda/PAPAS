@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lt.pap.converter.YearConverter;
@@ -44,11 +46,16 @@ public class WPart {
     @Column(name = "DSTATUS", nullable = false, length = 50)
    private String dstatus;
 
-    @Column(name="TYP_ID")
-    private Integer type;
+//    @Column(name="TYP_ID")
+  //  private Integer type;
     
-    @Column(name="ENG_ID")
-    private Integer engine;
+    @ManyToOne
+    @JoinColumn(name="TYP_ID")
+    private TofType tofType;
+
+    @ManyToOne
+    @JoinColumn(name="ENG_ID")
+    private TofEngine tofEngine;
     
     
 
@@ -112,21 +119,13 @@ public class WPart {
     {
         this.price2 = price2;
     }
-
-	public Integer getType() {
-		return type;
+    
+	public TofEngine getEngine() {
+		return tofEngine;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
-
-	public Integer getEngine() {
-		return engine;
-	}
-
-	public void setEngine(Integer engine) {
-		this.engine = engine;
+	public void setEngine(TofEngine engine) {
+		this.tofEngine = engine;
 	}
 
  
@@ -134,6 +133,42 @@ public class WPart {
     public void setWpartid(Integer wpartid)
     {
         this.wpartid = wpartid;
+    }
+
+    public String getDstatus()
+    {
+        return dstatus;
+    }
+
+    public void setDstatus(String dstatus)
+    {
+        this.dstatus = dstatus;
+    }
+
+    public TofType getTofType()
+    {
+        return tofType;
+    }
+
+    public void setTofType(TofType tofType)
+    {
+        this.tofType = tofType;
+    }
+
+    /**
+     * @return the tofEngine
+     */
+    public TofEngine getTofEngine()
+    {
+        return tofEngine;
+    }
+
+    /**
+     * @param tofEngine the tofEngine to set
+     */
+    public void setTofEngine(TofEngine tofEngine)
+    {
+        this.tofEngine = tofEngine;
     }
 
 //    public String getDstatus()
