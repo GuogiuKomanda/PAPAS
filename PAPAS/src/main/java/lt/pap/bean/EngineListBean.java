@@ -28,6 +28,8 @@ public class EngineListBean implements Serializable {
 
 	@Autowired
 	private WPartService wpartService;
+	
+	private String tofEngineCodeFilter;
 
 	private Short selectedManufacturer = null;
 	private List<Integer> selectedModelList = new ArrayList<Integer>();
@@ -98,5 +100,13 @@ public class EngineListBean implements Serializable {
 	public List<WPart> getWpartList() {
 		return wpartList;
 	}
+	
+	public void settofEngineCodeFilter(String tofEngineCodeFilter) {
+        this.tofEngineCodeFilter = tofEngineCodeFilter;
+    }
+
+    public String gettofEngineCodeFilter() {
+        return tofEngineCodeFilter;
+    }
 
 }
