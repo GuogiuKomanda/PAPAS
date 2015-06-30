@@ -7,7 +7,7 @@ import lt.pap.model.TofType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface TofTypeRepository extends JpaRepository<TofType, Long>
+public interface TofTypeRepository extends JpaRepository<TofType, Integer>
 {
    @Query(nativeQuery = true, value="SELECT typ.typ_id, typ.TYP_CDS_ID, typ.TYP_KW_FROM, typ.TYP_HP_FROM, typ.TYP_CCM"
    		+ "	FROM tof_engines eng"
