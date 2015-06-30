@@ -20,6 +20,8 @@ import lt.pap.model.TofEngine;
 import lt.pap.model.TofType;
 import lt.pap.model.WPart;
 import lt.pap.model.utils.Functions;
+import lt.pap.service.TofEngineService;
+import lt.pap.service.TofTypeService;
 import lt.pap.service.WPartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +37,20 @@ public class EngineEditBean {
 	
 	@Autowired
 	private WPartService wpartService;
+	
+	@Autowired
+	private TofEngineService engineService;
+	
+	@Autowired
+	private TofTypeService typeService;
 
-	private Short manufacturer;
+	private Short manufacturerId;
 	
-	private Integer model;
+	private Integer modelId;
 	private Integer  engineId;
-	private TofEngine engine;
+//	private TofEngine engine;
 	
-	private TofType type;
+	private Integer typeId;
 	
 	private String engineCodeFull;
 	
@@ -56,22 +64,26 @@ public class EngineEditBean {
 	
 
 	public void updateModelList() {
-		model = null;
+		modelId = null;
 		updateCodeList();
 	}
 
 	public void updateCodeList() {
-		engine = null;
+		engineId = null;
 		updateTypeList();
 	}
 	
 	public void updateTypeList() {
-		type = null;
+		typeId = null;
 	}
 	
 	public void doSave() {
 		
+		TofEngine engine = engineService.findOne(engineId, session.getLocaleId());
+		TofType type = typeService.findOne(typeId);
+		
 		WPart part = new WPart();
+		
 		part.setEngine(engine);
 		part.setFullCode(engineCodeFull);
 		part.setTofType(type);
@@ -87,24 +99,24 @@ public class EngineEditBean {
 	}
 
 	public List<SelectItem> getAvailableModelList() {
-		if (manufacturer != null) {
-			return session.getAvailableModels(manufacturer);
+		if (manufacturerId != null) {
+			return session.getAvailableModels(manufacturerId);
 		} else {
 			return new ArrayList<SelectItem>();
 		}
 	}
 	
 	public List<SelectItem> getAvailableEngineCodesList() {
-		if (model != null) {
-			return session.getAvailableEngineCodes(model);
+		if (modelId != null) {
+			return session.getAvailableEngineCodes(modelId);
 		} else {
 			return new ArrayList<SelectItem>();
 		}
 	}
 	
 	public List<SelectItem> getAvailableTypesList() {
-		if (model != null && engine != null) {
-			return session.getAvailableTypes(model, engine.getEngId());
+		if (modelId != null && engineId != null) {
+			return session.getAvailableTypes(modelId, engineId);
 		} else {
 			return new ArrayList<SelectItem>();
 		}
@@ -114,20 +126,20 @@ public class EngineEditBean {
 		return Functions.yearsAsSelectItems(1999, Year.now().getValue());
 	}
 
-	public Short getManufacturer() {
-		return manufacturer;
+	public Short getManufacturerId() {
+		return manufacturerId;
 	}
 
-	public void setManufacturer(Short manufacturer) {
-		this.manufacturer = manufacturer;
+	public void setManufacturerId(Short manufacturerId) {
+		this.manufacturerId = manufacturerId;
 	}
 
-	public Integer getModel() {
-		return model;
+	public Integer getModelId() {
+		return modelId;
 	}
 
-	public void setModel(Integer model) {
-		this.model = model;
+	public void setModelId(Integer modelId) {
+		this.modelId = modelId;
 	}
 
 	public Integer getEngineId() {
@@ -138,12 +150,12 @@ public class EngineEditBean {
 		this.engineId = engineId;
 	}
 
-	public TofType getType() {
-		return type;
+	public Integer getTypeId() {
+		return typeId;
 	}
 
-	public void setTofType(TofType type) {
-		this.type = type;
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
 	}
 
 	public String getEngineCodeFull() {

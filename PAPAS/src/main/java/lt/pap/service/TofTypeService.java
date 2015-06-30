@@ -28,9 +28,9 @@ public class TofTypeService
         return tofTypeRepository.findAll();
     }
 
-    public TofType findOne(Long typid)
+    public TofType findOne(Integer typeId)
     {
-        return tofTypeRepository.findOne(typid);
+        return tofTypeRepository.findOne(typeId);
     }
 
 	public List<SelectItem> findTypForSelect(Integer modelId, Integer engineId, Integer countryId, Short localeId) {
