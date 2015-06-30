@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 
 import lt.pap.model.WPart;
+import lt.pap.service.TofEngineService;
 import lt.pap.service.WPartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class EngineListBean implements Serializable {
 
 	@Autowired
 	private WPartService wpartService;
+	@Autowired
+	private TofEngineService tofEngineService;
 	
 	private String tofEngineCodeFilter;
 
@@ -36,6 +39,7 @@ public class EngineListBean implements Serializable {
 	private List<Integer> selectedFuelList = new ArrayList<Integer>();
 
 	private List<WPart> wpartList;
+	private List<String> engCodeList;
 
 	@PostConstruct
 	public void init() {
@@ -51,8 +55,11 @@ public class EngineListBean implements Serializable {
 	}
 
 	public void doSearch() {
-	    
-	    
+	    if (selectedManufacturer != null) {
+	    	engCodeList= tofEngineService.findEngineCodes(selectedManufacturer, selectedModelList, selectedFuelList);
+	    	wpartList= wpartService.findAllByTofEngineEngCodeIn(engCodeList);
+	    }
+	else
 		 wpartList = wpartService.findAll();
 	}
 

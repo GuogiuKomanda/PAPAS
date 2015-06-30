@@ -59,13 +59,20 @@ public class TofEngineService {
 //		engine.setEngKvEngineString(engKvEngineString);
 //	}
 	
-	public List<String> findEngineCodes(Integer manufacturerId, List<Integer> modelIdList, List<Integer> fuelIdList) {
+	public List<String> findEngineCodes(Short manufacturerId, List<Integer> modelIdList, List<Integer> fuelIdList) {
 		if(modelIdList.isEmpty() && fuelIdList.isEmpty()) { //only MF is selected
 			return tofEngineRepository.findEngineCodesbyManufacturer(manufacturerId);
 		}
-		if(!modelIdList.isEmpty() && fuelIdList.isEmpty()) { //models are selected, fuel list empty
-			//return something else
+		if(modelIdList.isEmpty() && !fuelIdList.isEmpty()) { // MF fuel is selected
+			return tofEngineRepository.findEngineCodesbyManufacturerAndFuel(manufacturerId, fuelIdList);
 		}
+		if(!modelIdList.isEmpty() && fuelIdList.isEmpty()) { //models are selected, fuel list empty
+			return tofEngineRepository.findEngineCodesbyModel(modelIdList);
+		}	
+		if(!modelIdList.isEmpty() && !fuelIdList.isEmpty()) { //models , fuel are selected
+			return tofEngineRepository.findEngineCodesbyModelAndFuel(modelIdList, fuelIdList);
+		}	
+		
 		
 		
 		return new ArrayList<String>();
