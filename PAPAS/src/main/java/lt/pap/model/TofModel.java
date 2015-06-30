@@ -59,7 +59,7 @@ public class TofModel implements Serializable {
 
     //TODO visiems des_id laukams sukuriam papildoma String lauka
     @Transient
-    private transient String ModString;
+    private transient String modelString;
     
 	@ManyToOne
 	@JoinColumn(name="MOD_MFA_ID")
@@ -198,14 +198,14 @@ public class TofModel implements Serializable {
         this.modCdsId = modCdsId;
     }
 
-    public String getModString()
+    public String getModelString()
     {
-        return ModString;
+        return modelString;
     }
 
-    public void setModString(String modString)
+    public void setModelString(String modelString)
     {
-        ModString = modString;
+        this.modelString = modelString;
     }
 
 //	public TofCountryDesignation getTofModCds() {

@@ -50,7 +50,7 @@ public class TofModelService
     @Transactional
     public TofModel findOne(Integer modelId,Integer countryId, short localeId) {
     TofModel model = tofmodelRepository.findOne(modelId);
-//        loadCountryDesignation(model, countryId, localeId );
+        loadModelDesignations(model, countryId, localeId );
         return model;
     }
 
@@ -61,9 +61,9 @@ public class TofModelService
         }
     }
     
-    private void loadCountryDesignation(TofModel model,Integer countryId, short localeId){
-        String ModString = tofCountryDesignationService.getCountryDesignationString(model.getModCdsId(), countryId, localeId);
-        model.setModString( ModString);
+    public void loadModelDesignations(TofModel model,Integer countryId, short localeId){
+        String modelString = tofCountryDesignationService.getCountryDesignationString(model.getModCdsId(), countryId, localeId);
+        model.setModelString( modelString);
     }
 
 	public List<SelectItem> findModelsForSelect(Short manufacturerId, Integer countryId, Short localeId) {

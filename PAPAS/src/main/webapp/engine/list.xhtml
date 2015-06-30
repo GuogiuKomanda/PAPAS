@@ -8,6 +8,9 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 <h:form id="mainForm">
+
+	<f:event type="preRenderView" listener="#{engineListBean.reload}"/>
+	
 	<h:panelGrid id="panel" columns="3" cellpadding="0">
 
 		<h:outputText value="#{msg['engine.list.make']}" />
@@ -68,16 +71,16 @@
 
 		<rich:column>
 			<f:facet name="header">
-				<h:outputText value="Model CDS Id" />
+				<h:outputText value="Model" />
 			</f:facet>
-			<h:outputText value="#{wp.tofType.tofModel.modCdsId}" />
+			<h:outputText value="#{wp.tofType.tofModel.modelString}" />
 		</rich:column>
 		
 		<rich:column>
 			<f:facet name="header">
-				<h:outputText value="Type cds id" />
+				<h:outputText value="Type" />
 			</f:facet>
-			<h:outputText value="#{wp.tofType.typCdsId}" />
+			<h:outputText value="#{wp.tofType.typeString}" />
 		</rich:column>
 		
 		<rich:column>
@@ -102,9 +105,9 @@
 		
 		<rich:column>
 			<f:facet name="header">
-				<h:outputText value="Fuel des id" />
+				<h:outputText value="Fuel" />
 			</f:facet>
-			<h:outputText value="#{wp.tofType.typKvFuelDesId}" />
+			<h:outputText value="#{wp.tofType.fuelString}" />
 		</rich:column>
 		
 		<rich:column>
@@ -135,17 +138,12 @@
 			<h:outputText value="#{wp.tofType.typPconEnd}" />
 		</rich:column>
 		
-<rich:column>
+		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="Part Year" />
 			</f:facet>
 			<h:outputText value="#{wp.year}" />
 		</rich:column>
-
-
-
-		
-		
 
 	</rich:dataTable>
 	

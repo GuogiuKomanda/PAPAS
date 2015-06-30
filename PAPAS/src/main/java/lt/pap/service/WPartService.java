@@ -14,23 +14,35 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class WPartService {
 	@Autowired
-	private WPartRepository WPartRepository;
+	private WPartRepository wPartRepository;
+	
+	@Autowired
+	private TofTypeService typeService;
 
 	public List<WPart> findAll() {
-		return WPartRepository.findAll();
+		return wPartRepository.findAll();
 	}
 
 	public WPart findOne(Integer id) {
-		return WPartRepository.findOne(id);
+		return wPartRepository.findOne(id);
 	}
 
 	public <S extends WPart> S save(S entity) {
-		return WPartRepository.save(entity);
+		return wPartRepository.save(entity);
 	}
 
 	public List<WPart> findAllByTofEngineEngCodeIn(List<String> codes) {
-		return WPartRepository.findAllByTofEngineEngCodeIn(codes);
+		return wPartRepository.findAllByTofEngineEngCodeIn(codes);
+	}
+	
+	public void loadWPartDesignations(WPart wPart, int countryId, short localeId){
+		typeService.loadTypeDesignations(wPart.getTofType(), countryId, localeId);
 	}
 
+	public void loadWPartListDesignations(List<WPart> wPartList, int countryId, short localeId){
+		for(WPart wPart : wPartList) {
+			loadWPartDesignations(wPart, countryId, localeId);
+		}
+	}
 	
 }

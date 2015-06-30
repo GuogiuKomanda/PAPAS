@@ -33,15 +33,11 @@ public class TofType implements Serializable {
 	@Column(name="TYP_CDS_ID")
     private Integer typCdsId;
 
-    
+	@Transient
+    private transient String typeString;
 
-    //TODO visiems des_id laukams sukuriam papildoma String lauka
-    @Transient
-    private transient String typString;
     @Column(name="TYP_MMT_CDS_ID")
     private Integer typMmtCdsId;
-
-    
 
     //TODO visiems des_id laukams sukuriam papildoma String lauka
     @Transient
@@ -70,16 +66,15 @@ public class TofType implements Serializable {
 
     //TODO visiems des_id laukams sukuriam papildoma String lauka
     @Transient
-    private transient String typKvFuelString;
+    private transient String fuelString;
     
     @Column(name="TYP_KV_BODY_DES_ID")
     private Integer typKvBodyDesId;
 
-    
 
-    //TODO visiems des_id laukams sukuriam papildoma String lauka
-    @Transient
-    private transient String typKvBodyString;
+//    //TODO visiems des_id laukams sukuriam papildoma String lauka
+//    @Transient
+//    private transient String typKvBodyString;
 	
 	@Column(name="TYP_KW_FROM")
 	private int typKwFrom;
@@ -280,5 +275,21 @@ public class TofType implements Serializable {
     {
         this.typPconStart = typPconStart;
     }
+
+	public String getTypeString() {
+		return typeString;
+	}
+
+	public void setTypeString(String typeString) {
+		this.typeString = typeString;
+	}
+
+	public String getFuelString() {
+		return fuelString;
+	}
+
+	public void setFuelString(String fuelString) {
+		this.fuelString = fuelString;
+	}
 
 }
