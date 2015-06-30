@@ -2,6 +2,7 @@ package lt.pap.service;
 
 import init.TestConfig;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lt.pap.model.WPart;
@@ -26,4 +27,12 @@ public class WpartServiceTest
         System.out.println(items.size());
     }
     
+    @Test
+    public void test2() {
+    	List<String> codes = new ArrayList<String>();
+    	codes.add("CAYC");
+        List<WPart> items = wpartService.findAllByTofEngineEngCodeIn(codes);
+        System.out.println(items.size());
+    }
+
 }

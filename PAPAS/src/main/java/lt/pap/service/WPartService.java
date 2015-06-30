@@ -28,4 +28,9 @@ public class WPartService {
 		return WPartRepository.save(entity);
 	}
 
+	public List<WPart> findAllByTofEngineEngCodeIn(List<String> codes) {
+		return WPartRepository.findAllByTofEngineEngCodeIn(codes);
+	}
+
+	
 }
