@@ -22,4 +22,15 @@ public interface TofEngineRepository extends JpaRepository<TofEngine, Integer>
     		+ "left join tof_models model on mod_id= typ.typ_mod_id "
     		+ "WHERE model.mod_id=?1 ")
     public List<Object[]> findEngineCodesForSelect(Integer modelId);
+    
+    @Query(nativeQuery = true, value="SELECT ...")
+    public List<String> findEngineCodesbyManufacturer(Integer mfaId);
+    
+    @Query(nativeQuery = true, value="SELECT ...")
+    public List<String> findEngineCodesbyManufacturerAndFuel(Integer manufacturerId, List<Integer> fuelIdList);
+    
+    @Query(nativeQuery = true, value="SELECT ...")
+    public List<String> findEngineCodesbyModel(List<Integer> modelId);
+    
+    //visi like variantai
 }

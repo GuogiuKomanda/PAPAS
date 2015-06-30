@@ -1,5 +1,6 @@
 package lt.pap.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,5 +59,15 @@ public class TofEngineService {
 //		engine.setEngKvEngineString(engKvEngineString);
 //	}
 	
-	
+	public List<String> findEngineCodes(Integer manufacturerId, List<Integer> modelIdList, List<Integer> fuelIdList) {
+		if(modelIdList.isEmpty() && fuelIdList.isEmpty()) { //only MF is selected
+			return tofEngineRepository.findEngineCodesbyManufacturer(manufacturerId);
+		}
+		if(!modelIdList.isEmpty() && fuelIdList.isEmpty()) { //models are selected, fuel list empty
+			//return something else
+		}
+		
+		
+		return new ArrayList<String>();
+	}
 }
