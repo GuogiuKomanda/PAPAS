@@ -1,6 +1,7 @@
 package lt.pap.model;
 
 import java.time.Year;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -24,32 +25,139 @@ public class WPart {
     @Column(name="WPART_ID")
     private Integer wpartid;
 
-
-    @Column(name = "LOCATION", nullable = false, length = 50)
+    @Column(name="TREE_ID")
+    private Integer treeid;
+    
+    @Column(name="BRAND_ID")
+    private Integer brandid;
+    
+    @Column(name = "BRANDCODE",  length = 20)
+    private String brandcode;
+    
+    @Column(name = "CODE",  length = 20)
+    private String code;
+    
+    @Column(name = "CODE2",  length = 20)
+    private String code2;
+    
+    @Column(name = "CODE3",  length = 20)
+    private String code3;
+    
+    @Column(name = "LOCATION",  length = 50)
     private String location;
     
-    @Column(name = "PRICE1", nullable =false)
+    @Column(name = "PRICE1")
     private Float price1;
     
-    @Column(name = "PRICE2", nullable =false)
+    @Column(name = "PRICE2")
     private Float price2;
     
-    @Column(name = "year", nullable = false)
+    @Column(name = "year")
     @Convert(converter = YearConverter.class)
     private Year year;
 
-    @Column(name = "fullcode", nullable = false, length = 50)
+    @Column(name = "FULLCODE",  length = 50)
     private String fullCode;
 
-   
-   
-    @Column(name = "DSTATUS", nullable = false, length = 50)
+    @Column(name = "DEFECT")
+    private Boolean defect;
+    
+    @Column(name = "DSTATUS",  length = 50)
    private String dstatus;
+    
+    @Column(name = "PHOTO_PATH",  length = 150)
+    private String photoPath;
+    
+    @Column(name = "TIME_STAMP")
+    private Date timeStamp;
+    
+    @Column(name="PART_STATUS")
+    private Integer partStatus;
 
 //    @Column(name="TYP_ID")
   //  private Integer type;
     
-    @ManyToOne
+    public Integer getTreeid() {
+		return treeid;
+	}
+
+	public void setTreeid(Integer treeid) {
+		this.treeid = treeid;
+	}
+
+	public Integer getBrandid() {
+		return brandid;
+	}
+
+	public void setBrandid(Integer brandid) {
+		this.brandid = brandid;
+	}
+
+	public String getBrandcode() {
+		return brandcode;
+	}
+
+	public void setBrandcode(String brandcode) {
+		this.brandcode = brandcode;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getCode2() {
+		return code2;
+	}
+
+	public void setCode2(String code2) {
+		this.code2 = code2;
+	}
+
+	public String getCode3() {
+		return code3;
+	}
+
+	public void setCode3(String code3) {
+		this.code3 = code3;
+	}
+
+	public Boolean getdefect() {
+		return defect;
+	}
+
+	public void setdefect(Boolean defect) {
+		this.defect = defect;
+	}
+
+	public String getPhotoPath() {
+		return photoPath;
+	}
+
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
+
+	public Date getTimeStamp() {
+		return timeStamp;
+	}
+
+	public void setTimeStamp(Date timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+
+	public Integer getPartStatus() {
+		return partStatus;
+	}
+
+	public void setPartStatus(Integer partStatus) {
+		this.partStatus = partStatus;
+	}
+
+	@ManyToOne
     @JoinColumn(name="TYP_ID")
     private TofType tofType;
 

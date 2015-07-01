@@ -54,7 +54,7 @@ public class EngineEditBean {
 	
 	private String engineCodeFull;
 	
-	private String year;
+	private int year;
 	
 	private String comment;
 	
@@ -62,6 +62,17 @@ public class EngineEditBean {
 	
 	private String price2;
 	
+	private String location;
+	
+	
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 	public void updateModelList() {
 		modelId = null;
@@ -87,11 +98,25 @@ public class EngineEditBean {
 		part.setEngine(engine);
 		part.setFullCode(engineCodeFull);
 		part.setTofType(type);
-		part.setLocation("xxx");
-		//part.setDstatus("dstatus");
-//		part.setYear(year);
+		
+		part.setPrice1(Float.parseFloat(price1));
+		part.setPrice2(Float.parseFloat(price2));
+		
+		part.setLocation(location);
+		part.setYear(Year.of(year));
+		part.setTreeid(1);
+		part.setBrandcode(null);
+		part.setBrandid(null);
+		part.setCode(null);
+		part.setCode2(null);
+		part.setCode3(null);
+		part.setdefect(false);
+		part.setPartStatus(1);
+		part.setDstatus(null);
+		part.setPhotoPath(null);
+		part.setTimeStamp(null);
 		wpartService.save(part);
-		// selectedModelList, selectedFuelTypeList);
+		
 	}
 
 	public List<SelectItem> getAvailableManufacturerList() {
@@ -166,11 +191,11 @@ public class EngineEditBean {
 		this.engineCodeFull = engineCodeFull;
 	}
 
-	public String getYear() {
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 
