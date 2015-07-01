@@ -15,9 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class WPartService {
 	@Autowired
 	private WPartRepository wPartRepository;
-	
-	@Autowired
-	private TofTypeService typeService;
 
 	public List<WPart> findAll() {
 		return wPartRepository.findAll();
@@ -34,15 +31,4 @@ public class WPartService {
 	public List<WPart> findAllByTofEngineEngCodeIn(List<String> codes) {
 		return wPartRepository.findAllByTofEngineEngCodeIn(codes);
 	}
-	
-	public void loadWPartDesignations(WPart wPart, int countryId, short localeId){
-		typeService.loadTypeDesignations(wPart.getTofType(), countryId, localeId);
-	}
-
-	public void loadWPartListDesignations(List<WPart> wPartList, int countryId, short localeId){
-		for(WPart wPart : wPartList) {
-			loadWPartDesignations(wPart, countryId, localeId);
-		}
-	}
-	
 }

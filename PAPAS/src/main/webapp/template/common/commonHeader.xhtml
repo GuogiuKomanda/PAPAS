@@ -11,9 +11,8 @@
 		<!-- begin language switcher -->
 		<h:form id="lngForm">
 
-			<h:selectOneMenu id="language-options" value="#{sessionBean.localeString}" style="width:120px;">
+			<h:selectOneMenu id="language-options" value="#{sessionBean.localeString}" style="width:120px;" onchange="submit()" valueChangeListener="#{sessionBean.localeChanged}">
 				<f:selectItems value="#{sessionBean.supportedLocales.entrySet()}" var="entry" itemValue="#{entry.key}" itemLabel="#{entry.value}" />
-				<f:ajax listener="#{sessionBean.localeChanged}" render="mainForm" />
 			</h:selectOneMenu>
 
 			<h:outputScript>

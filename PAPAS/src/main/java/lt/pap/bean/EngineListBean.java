@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 
 import lt.pap.model.WPart;
+import lt.pap.service.I18nService;
 import lt.pap.service.TofEngineService;
 import lt.pap.service.WPartService;
 
@@ -27,6 +28,8 @@ public class EngineListBean implements Serializable {
 	@Autowired
 	private SessionBean session;
 
+	@Autowired
+	private I18nService i18nService;
 	@Autowired
 	private WPartService wpartService;
 	@Autowired
@@ -68,7 +71,7 @@ public class EngineListBean implements Serializable {
 	 * Loads designations
 	 */
 	public void reload() {
-		wpartService.loadWPartListDesignations(wpartList, session.getCountryId(), session.getLocaleId());
+		i18nService.loadWPartListDesignations(wpartList, session.getCountryId(), session.getLocaleId());
 	}
 
 	public List<SelectItem> getAvailableManufacturerList() {

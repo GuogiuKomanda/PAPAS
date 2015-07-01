@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,7 +66,7 @@ public class SessionBean implements Serializable {
 
 
 	public SessionBean() {
-
+		localeString="en";
 	}
 
 	public Map<Locale, String> getSupportedLocales() {
@@ -81,7 +82,8 @@ public class SessionBean implements Serializable {
 		this.localeId = ApplicationBean.localeStringToId(localeString);
 	}
 
-	public void localeChanged() {
+	public void localeChanged(ValueChangeEvent e) {
+		localeString = e.getNewValue().toString();
 		for (Map.Entry<Locale, String> entry : getSupportedLocales().entrySet()) {
 			if (entry.getKey().toString().equals(localeString)) {
 				Locale locale = entry.getKey();

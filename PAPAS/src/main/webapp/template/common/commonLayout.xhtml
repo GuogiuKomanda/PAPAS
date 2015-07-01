@@ -1,42 +1,47 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<h:html xmlns="http://www.w3.org/1999/xhtml"   
+<h:html lang="#{sessionBean.localeString}"
+	  xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
       >
-
-	<h:head>
-		<h:outputScript name="jquery.js" />
-		<h:outputScript library="chosen" name="chosen.jquery.js" />
-		<h:outputScript library="chosen" name="chosen.proto.js" />
-		<h:outputStylesheet library="chosen" name="chosen.css" />
+      
+	<f:view locale="#{sessionBean.localeString}">
+		<h:head>
+			<h:outputScript name="jquery.js" />
+			<h:outputScript library="chosen" name="chosen.jquery.js" />
+			<h:outputScript library="chosen" name="chosen.proto.js" />
+			<h:outputStylesheet library="chosen" name="chosen.css" />
+			
+			<h:outputScript library="imageSelect" name="ImageSelect.jquery.js" />
+			<h:outputStylesheet library="imageSelect" name="ImageSelect.css" />
 		
-		<h:outputScript library="imageSelect" name="ImageSelect.jquery.js" />
-		<h:outputStylesheet library="imageSelect" name="ImageSelect.css" />
-	
-		<h:outputStylesheet library="css" name="lang.css" />
-		<h:outputStylesheet library="css" name="styles.css" />
-	</h:head>
-    
-    <h:body>
-		<h:panelGroup layout="block" id="page">
-	
-			<h:panelGroup layout="block" id="header">
-				<ui:insert name="header" >
-					<ui:include src="/template/common/commonHeader.xhtml" />
-				</ui:insert>
-		    </h:panelGroup>
-		    
-		    <h:panelGroup layout="block" id="mainPage">
-			   	<ui:insert name="content" >
-			   		<ui:include src="/template/common/commonContent.xhtml" />
-			   	</ui:insert>
-		    </h:panelGroup>
+			<h:outputStylesheet library="css" name="lang.css" />
+			<h:outputStylesheet library="css" name="styles.css" />
+		</h:head>
+	    
+	    
+	    <h:body>
+			<h:panelGroup layout="block" id="page">
+		
+				<h:panelGroup layout="block" id="header">
+					<ui:insert name="header" >
+						<ui:include src="/template/common/commonHeader.xhtml" />
+					</ui:insert>
+			    </h:panelGroup>
 			    
-		    <h:panelGroup layout="block" id="footer">
-		    	<ui:insert name="footer" >
-		    		<ui:include src="/template/common/commonFooter.xhtml" />
-		    	</ui:insert>
-	    	</h:panelGroup>
-		</h:panelGroup>
-    </h:body>
+			    <h:panelGroup layout="block" id="mainPage">
+				   	<ui:insert name="content" >
+				   		<ui:include src="/template/common/commonContent.xhtml" />
+				   	</ui:insert>
+			    </h:panelGroup>
+				    
+			    <h:panelGroup layout="block" id="footer">
+			    	<ui:insert name="footer" >
+			    		<ui:include src="/template/common/commonFooter.xhtml" />
+			    	</ui:insert>
+		    	</h:panelGroup>
+			</h:panelGroup>
+	    </h:body>
+    </f:view>
 </h:html>

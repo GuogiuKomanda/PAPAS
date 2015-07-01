@@ -21,13 +21,7 @@ public class TofTypeService
     private TofTypeRepository tofTypeRepository;
     
     @Autowired
-    private TofModelService modelService;
-    
-    @Autowired
     private TofCountryDesignationService countryDesignationService;
-    
-    @Autowired
-    private TofDesignationService designationService;
 
     public List<TofType> findAll()
     {
@@ -48,12 +42,4 @@ public class TofTypeService
 								list[3]+"HP\\"+
 								list[4]+"cc");} ).collect(Collectors.toList());
 	}
-    
-    public void loadTypeDesignations(TofType type, int countryId, short localeId){
-    	type.setFuelString(designationService.getDesignationString(type.getTypKvFuelDesId(), localeId));
-    	type.setTypeString(countryDesignationService.getCountryDesignationString(type.getTypCdsId(), countryId, localeId));
-    	
-    	modelService.loadModelDesignations(type.getTofModel(), countryId, localeId);
-    	
-    }
 }

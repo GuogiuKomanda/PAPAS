@@ -15,17 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class TofCountryDesignationService {
 
 	@Autowired
-	private TofCountryDesignationRepository tofCountryDesignationRepository;
+	private TofCountryDesignationRepository countryDesignationRepository;
 
 
 	public String getCountryDesignationString(Integer countryDesignationId,	Integer countryId,  Short localeId) {
 		return getCountryDesignationsString(countryDesignationId, countryId,	localeId); // 4 - English. At the moment all county_designations are in English only
 	}
 
-	private String getCountryDesignationsString(Integer countryDesignationId,
-			Integer countryId, Short localeId) {
+	private String getCountryDesignationsString(Integer countryDesignationId, Integer countryId, Short localeId) {
 
-		List<TofCountryDesignation> cdList = tofCountryDesignationRepository.findCountryDesignationById(countryDesignationId, countryId, localeId);
+		List<TofCountryDesignation> cdList = countryDesignationRepository.findCountryDesignationById(countryDesignationId, countryId, localeId);
 
 		if (cdList == null || cdList.isEmpty()) {
 			return null;
