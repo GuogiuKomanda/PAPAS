@@ -6,6 +6,10 @@
 	xmlns:f5="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
+	
+<h:head>
+			<h:outputScript library="js" name="viewStateFix.js" />
+</h:head>
 
 <h:form id="mainForm">
 	<h:panelGrid id="panel" columns="2" cellpadding="0">
@@ -97,9 +101,11 @@
     	
     	<p></p>
     	
-    	<ui:repeat id="pathList" value="#{engineEditBean.pathList}" var="item">
-    		#{item}<br/>
-		</ui:repeat>
+    	<h:panelGroup id="pathList" layout="block">
+	    	<ui:repeat value="#{engineEditBean.pathList}" var="item">
+	    		#{item}<br/>
+			</ui:repeat>
+		</h:panelGroup>
 		
 		<p></p>
 		
@@ -131,10 +137,11 @@
                     <h:commandButton id="uploadBtnId" value="Upload" actionListener="#{engineEditBean.upload}" render="uploadMessagesId" onevent="uploadProgress" onerror="uploadError">
                         <f:attribute name="maxFilesNumber" value="5"/> 
                         <f:attribute name="maxFileSize" value="2097152"/> 
-                        <f:attribute name="fileTypes" value="image/"/> 
+                        <f:attribute name="fileTypes" value="image/"/>
+                        <f:ajax execute="@form" render="mainForm:pathList"></f:ajax> 
                     </h:commandButton>
                     <h:commandButton id="cancelBtnId" type="button" onclick="sendAllFilesToTrash(true);" value="Clear"/>
-                    <h:commandButton id="closeBtnId" type="button" onclick="sendAllFilesToTrash(true); #{rich:component('popup')}.hide(); return false; " value="Close" render="pathList"/>         
+                    <h:commandButton id="closeBtnId" type="button" onclick="sendAllFilesToTrash(true); #{rich:component('popup')}.hide(); return false; " value="Close" render="mainForm:pathList"/>         
                     <f:verbatim>
                         <img id="progressBarId" width="55" height="55" class="ajax-loader"/>
                     </f:verbatim>
