@@ -11,6 +11,8 @@
 			<h:outputScript library="js" name="viewStateFix.js" />
 </h:head>
 
+
+
 <h:form id="mainForm">
 	<h:panelGrid id="panel" columns="2" cellpadding="0">
 
@@ -101,11 +103,26 @@
     	
     	<p></p>
     	
-    	<h:panelGroup id="pathList" layout="block">
-	    	<ui:repeat value="#{engineEditBean.pathList}" var="item">
-	    		#{item}<br/>
-			</ui:repeat>
-		</h:panelGroup>
+			<h:dataTable id="pathList" binding="#{table}" border="0" value="#{engineEditBean.pathList}" var="p">
+ 
+    			<h:column style="width: 60px;">
+    				<h:panelGroup styleClass="grow" layout="block">
+    					<h:graphicImage value="/images/#{p.path}" />
+    					</h:panelGroup>
+    			</h:column>
+    			
+    			<h:column style="width: 120px;">
+    				<h:outputText value="#{p.name}" styleClass="file-info" />
+    				<br/>
+    				<h:outputText value="#{p.description}" styleClass="file-size" />
+    			</h:column>
+    			
+    			<h:column style="width: 60px;">
+    				<h:commandLink action="#{engineEditBean.deleteImage(table.rowIndex)}" render="pathList">
+    					<h:graphicImage value="#{resource['images/deleteButton.png']}" />
+    				</h:commandLink>
+    			</h:column>
+    		</h:dataTable>
 		
 		<p></p>
 		
@@ -268,7 +285,7 @@
                     cellName.innerHTML = ['<span class="files-info">', fileName, '</span><br/>\n\
                                 <span class="files-size">', fileSize, '<span>'].join('');
                     cellTrash.style.width = '20px';
-                    cellTrash.innerHTML = ['<div class="bw"><img src="./resources/default/images/trash.png"\n\
+                    cellTrash.innerHTML = ['<div class="bw"><img src="#{resource['images/deleteButton.png']}"\n\
                          onclick="sendFileToTrash(', row.rowIndex, ',\'', theFile.name, '\');" title=""/></div>'].join('');
                 }
 
@@ -277,7 +294,7 @@
                     var cellErr = row.insertCell(0);
                     cellErr.colSpan = "3";
                     cellErr.style.width = '540px';
-                    cellErr.innerHTML = ['<div class="err-div"><img src="./resources/default/images/err.png"/>\n\
+                    cellErr.innerHTML = ['<div class="err-div"><img src="#{resource['images/deleteButton.png']}"/>\n\
                         <span class="files-info">', fileName, ' (', fileSize, ')</span><br/>', errCode, '</div>'].join('');
                     rejectedFiles = true;
                     markForTrash(fileName);

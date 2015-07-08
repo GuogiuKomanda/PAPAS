@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,10 +20,12 @@ import javax.servlet.http.Part;
 import lt.pap.model.TofEngine;
 import lt.pap.model.TofType;
 import lt.pap.model.WPart;
+import lt.pap.model.WPartImage;
 import lt.pap.model.utils.Functions;
 import lt.pap.service.TofEngineService;
 import lt.pap.service.TofTypeService;
 import lt.pap.service.WPartService;
+import lt.pap.servlet.ImageServlet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,6 +34,8 @@ import org.springframework.stereotype.Component;
 @Component("engineEditBean")
 @Scope("session")
 public class EngineEditBean {
+	
+	private String UNIQUE_FOLDER = UUID.randomUUID().toString();
 	
 	@Autowired
 	private SessionBean session;
@@ -64,7 +69,30 @@ public class EngineEditBean {
 	
 	private String location;
 	
+	//temporal
+	private Integer wpartId;
 	
+	public Integer getWpartId() {
+		return wpartId;
+	}
+
+	public void setWpartId(Integer wpartId) {
+		this.wpartId = wpartId;
+	}
+
+	private WPart part = new WPart();
+	
+	public void init() {
+		if(wpartId != null) {
+			part = wpartService.findOne(wpartId);
+			pathList = part.getPathList();
+			
+			 //manufacturerId = part.getBrandId().shortValue();
+			 engineCodeFull = part.getFullCode();
+			//TODO others?
+
+		}
+	}
 
 	public String getLocation() {
 		return location;
@@ -93,8 +121,6 @@ public class EngineEditBean {
 		TofEngine engine = engineService.findOne(engineId, session.getLocaleId());
 		TofType type = typeService.findOne(typeId);
 		
-		WPart part = new WPart();
-		
 		part.setEngine(engine);
 		part.setFullCode(engineCodeFull);
 		part.setTofType(type);
@@ -115,6 +141,9 @@ public class EngineEditBean {
 		part.setDstatus(null);
 		part.setPhotoPath(null);
 		part.setTimeStamp(null);
+		
+		part.setPathList(pathList);
+		
 		wpartService.save(part);
 		
 	}
@@ -223,13 +252,13 @@ public class EngineEditBean {
 		this.comment = comment;
 	}
 
-    private List<String> pathList = new ArrayList<String>();
+    private List<WPartImage> pathList = new ArrayList<WPartImage>();
    
-    public List<String> getPathList() {
+    public List<WPartImage> getPathList() {
 		return pathList;
 	}
 
-	public void setPathList(List<String> pathList) {
+	public void setPathList(List<WPartImage> pathList) {
 		this.pathList = pathList;
 	}
 
@@ -237,13 +266,25 @@ public class EngineEditBean {
     private List<Part> files;
     private String trash = "{items: []}";
     
-    private static String FOLDER = "D:\\uploads";
     
+   public void  deleteImage(Integer index) {
+	   WPartImage img =  pathList.get(index);
+	   
+	   File imgFile = new File (ImageServlet.FOLDER + File.separator + img.getPath());
+	   imgFile.delete();
+	  // pathList.remove(img);
+	   
+	   if(part.getPathList().remove(img)) {
+		   wpartService.save(part);
+	   }
+   }
 
 
     public void upload(ActionEvent event) {               
 
         if (files != null) {
+        	
+//        	pathList.clear();
 
             int countFiles = 0;
             String trashFiles = trash.substring(trash.indexOf(":"), trash.length() - 1);
@@ -279,7 +320,9 @@ public class EngineEditBean {
                                     logger.log(Level.INFO, "Submitted file name:{0}", file.getSubmittedFileName());
                                     logger.log(Level.INFO, "File size:{0}", file.getSize());
 
-                                    String path = FOLDER + File.separator + file.getSubmittedFileName();
+                                    String path = ImageServlet.FOLDER + File.separator + UNIQUE_FOLDER;
+                                    new File(path).mkdirs();//init dirs
+                                    path +=  File.separator+ file.getSubmittedFileName();
                                     try (InputStream inputStream = file.getInputStream(); FileOutputStream outputStream = new FileOutputStream(path)) {
 
                                         int bytesRead = 0;
@@ -287,32 +330,37 @@ public class EngineEditBean {
                                         while ((bytesRead = inputStream.read(chunck)) != -1) {
                                             outputStream.write(chunck, 0, bytesRead);
                                         }
-                                        
-                                        pathList.add(path);
+                                        WPartImage img = new WPartImage();
+                                        img.setPath(path.substring(path.indexOf(UNIQUE_FOLDER)));
+                                        img.setName(file.getSubmittedFileName());
+                                        img.setDescription(""+file.getSize());
+                                        pathList.add(img);
 
                                         countFiles++;
 
-                                        FacesContext.getCurrentInstance().addMessage("uploadFormId:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Upload successfully ended: " + fileNameToDisplay, ""));
+                                        FacesContext.getCurrentInstance().addMessage("mainForm:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_INFO, "Upload successfully ended: " + fileNameToDisplay, ""));
                                     } catch (IOException ex) {
-                                        FacesContext.getCurrentInstance().addMessage("uploadFormId:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Upload " + fileNameToDisplay + " failed !", ""));
+                                        FacesContext.getCurrentInstance().addMessage("mainForm:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Upload " + fileNameToDisplay + " failed !", ""));
                                     }
                                 } else {
-                                    FacesContext.getCurrentInstance().addMessage("uploadFormId:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "You can upload maxim 5 images !", ""));
+                                    FacesContext.getCurrentInstance().addMessage("mainForm:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "You can upload maxim 5 images !", ""));
                                     break;
                                 }
                             } else {
-                                FacesContext.getCurrentInstance().addMessage("uploadFormId:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "File: " + fileNameToDisplay + " has more than 2 MB !", ""));
+                                FacesContext.getCurrentInstance().addMessage("mainForm:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "File: " + fileNameToDisplay + " has more than 2 MB !", ""));
                             }
                         } else {
-                            FacesContext.getCurrentInstance().addMessage("uploadFormId:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "File " + fileNameToDisplay + " is not an accepted image !", ""));
+                            FacesContext.getCurrentInstance().addMessage("mainForm:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "File " + fileNameToDisplay + " is not an accepted image !", ""));
                         }
                     }
                 }
             }
             if (countFiles == 0) {
-                FacesContext.getCurrentInstance().addMessage("uploadFormId:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "There are no files to upload !", ""));
+                FacesContext.getCurrentInstance().addMessage("mainForm:fileToUploadId", new FacesMessage(FacesMessage.SEVERITY_ERROR, "There are no files to upload !", ""));
             }
         }
+        
+//        doSave();
     }
 
     public String getTrash() {

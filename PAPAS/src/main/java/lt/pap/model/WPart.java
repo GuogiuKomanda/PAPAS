@@ -1,11 +1,16 @@
 package lt.pap.model;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.Convert;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -85,7 +90,7 @@ public class WPart {
 		this.treeid = treeid;
 	}
 
-	public Integer getBrandid() {
+	public Integer getBrandId() {
 		return brandid;
 	}
 
@@ -164,6 +169,14 @@ public class WPart {
     @ManyToOne
     @JoinColumn(name="ENG_ID")
     private TofEngine tofEngine;
+    
+    
+    @ElementCollection(fetch=FetchType.EAGER)
+    @CollectionTable(
+          name="wpart_to_image",
+          joinColumns=@JoinColumn(name="WPART_ID")
+    )
+    private List<WPartImage> pathList = new ArrayList<WPartImage>();
     
     
 
@@ -278,6 +291,14 @@ public class WPart {
     {
         this.tofEngine = tofEngine;
     }
+
+	public List<WPartImage> getPathList() {
+		return pathList;
+	}
+
+	public void setPathList(List<WPartImage> pathList) {
+		this.pathList = pathList;
+	}
 
 //    public String getDstatus()
 //    {

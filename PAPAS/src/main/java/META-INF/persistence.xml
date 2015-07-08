@@ -19,5 +19,6 @@
 		<class>lt.pap.model.WPart</class>
 		<class>lt.pap.converter.YearConverter</class>
 		<class>lt.pap.converter.YearMonthConverter</class>
+		<class>lt.pap.model.WPartImage</class>
 	</persistence-unit>
 </persistence>
