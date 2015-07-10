@@ -114,7 +114,7 @@ width: 100px; height: 20px; position: relative;
 /* http://designshack.net/articles/css/joshuajohnson-2/ */
 .grow img {
     height: 60px;
-    width: 60px;
+
     -webkit-transition: all 1s ease;
     -moz-transition: all 1s ease;
     -o-transition: all 1s ease;
@@ -123,7 +123,7 @@ width: 100px; height: 20px; position: relative;
 }
 
 .grow img:hover {
-    width: 200px;
+
     height: 200px;
 }
 

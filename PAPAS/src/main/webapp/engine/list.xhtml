@@ -9,60 +9,15 @@
 
 <h:form id="mainForm">
 
-	<f:event type="preRenderView" listener="#{engineListBean.reload}"/>
-	
-	<h:panelGrid id="panel" columns="3" cellpadding="0">
+	<f:event type="preRenderView" listener="#{engineListBean.reload}" />
 
-		<h:outputText value="#{msg['engine.list.make']}" />
-		<h:outputText value="#{msg['engine.list.model']}" />
-		<h:outputText value="#{msg['engine.list.fuel']}" />
-
-
-		<h:panelGroup id="makePanel">
-			<h:selectOneMenu id="makeSelect" value="#{engineListBean.selectedManufacturer}"	style="width:350px;" styleClass="chosen-select">
-				<f:selectItem itemLabel="-" itemValue="#{null}" />
-				<f:selectItems value="#{engineListBean.availableManufacturerList}"/>
-				<f:ajax listener="#{engineListBean.updateModelList}" render="modelPanel" execute="makeSelect"/>
-			</h:selectOneMenu>
-			<h:outputScript>
-               jQuery("#mainForm\\:makeSelect").chosen({});
-        	</h:outputScript>
-		</h:panelGroup>
-
-
-		<h:panelGroup id="modelPanel">
-			<h:selectManyListbox id="modelSelect" value="#{engineListBean.selectedModelList}" style="width:350px;" styleClass="chosen-select" 
-				multiple="true" data-placeholder="Select models">
-				<f:selectItems value="#{engineListBean.availableModelList}" />
-				<f:ajax listener="#{engineListBean.updateFuelList}" />
-			</h:selectManyListbox>
-			<h:outputScript>
-               jQuery("#mainForm\\:modelSelect").chosen({});
-        	</h:outputScript>
-		</h:panelGroup>
-
-
-		<h:panelGroup id="fuelPanel">
-			<h:selectManyListbox id="fuelSelect" value="#{engineListBean.selectedFuelList}" style="width:350px;" styleClass="chosen-select" multiple="true" data-placeholder="Select fuel">
-				<f:selectItems value="#{engineListBean.availableFuelList}" />
-				<f:ajax listener="#{engineListBean.updateFuelList}" />
-			</h:selectManyListbox>
-			<h:outputScript>
-	        	jQuery("#mainForm\\:fuelSelect").chosen({});
-	        </h:outputScript>
-        </h:panelGroup>
-
-
-	</h:panelGrid>
-
-	<a4j:commandButton value="Search" render="resultsTable" execute="@form"	action="#{engineListBean.doSearch}" />
-
-	<rich:dataTable value="#{engineListBean.wpartList}" var="wp" id="resultsTable" rows="30">
+	<rich:dataTable value="#{engineListBean.wpartList}" var="wp"
+		id="resultsTable" rows="30">
 		<f:facet name="noData">
 	    	Nothing found
 	    </f:facet>
 
-  <rich:column>
+		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="Make" />
 			</f:facet>
@@ -75,69 +30,56 @@
 			</f:facet>
 			<h:outputText value="#{wp.tofType.tofModel.modelString}" />
 		</rich:column>
-		
+
 		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="Type" />
 			</f:facet>
 			<h:outputText value="#{wp.tofType.typeString}" />
 		</rich:column>
-		
+
 		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="Engine code" />
 			</f:facet>
 			<h:outputText value="#{wp.tofEngine.engCode}" />
 		</rich:column>
-		
-		<rich:column filterExpression="#{fn:containsIgnoreCase(wp.tofEngine.engCode,engineListBean.tofEngineCodeFilter)}" filterType="custom">
-   <f:facet name="header">
-    <h:panelGroup>
-     <h:outputText value="Numeris"  />
-     <h:inputText value="#{engineListBean.tofEngineCodeFilter}" onkeypress="check(event);">
-      <a4j:ajax event="blur" render="resultsTable" execute="@this" />
-     </h:inputText>
-    </h:panelGroup>
-   </f:facet>
-   <h:outputText value="#{wp.tofEngine.engCode}" />
-  </rich:column>
-		
-		
+
 		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="Fuel" />
 			</f:facet>
 			<h:outputText value="#{wp.tofType.fuelString}" />
 		</rich:column>
-		
+
 		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="CCM" />
 			</f:facet>
 			<h:outputText value="#{wp.tofType.typCcm}" />
 		</rich:column>
-		
+
 		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="KW" />
 			</f:facet>
 			<h:outputText value="#{wp.tofType.typKwFrom}" />
 		</rich:column>
-		
+
 		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="Type start Year" />
 			</f:facet>
 			<h:outputText value="#{wp.tofType.typPconStart}" />
 		</rich:column>
-		
+
 		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="Type end Year" />
 			</f:facet>
 			<h:outputText value="#{wp.tofType.typPconEnd}" />
 		</rich:column>
-		
+
 		<rich:column>
 			<f:facet name="header">
 				<h:outputText value="Part Year" />
@@ -146,7 +88,7 @@
 		</rich:column>
 
 	</rich:dataTable>
-	
+
 </h:form>
 <h:messages />
 

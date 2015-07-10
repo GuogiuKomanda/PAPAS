@@ -32,41 +32,16 @@ public class EngineListBean implements Serializable {
 	private I18nService i18nService;
 	@Autowired
 	private WPartService wpartService;
-	@Autowired
-	private TofEngineService tofEngineService;
-	
-	private String tofEngineCodeFilter;
 
-	private Short selectedManufacturer = null;
-	private List<Integer> selectedModelList = new ArrayList<Integer>();
-	private List<Integer> selectedFuelList = new ArrayList<Integer>();
 
 	private List<WPart> wpartList = new ArrayList<WPart>();
-	private List<String> engCodeList;
 
 	@PostConstruct
 	public void init() {
-
+		wpartList = wpartService.findAll();
+		//reload();
 	}
 
-	public void updateModelList() {
-
-	}
-
-	public void updateFuelList() {
-
-	}
-
-	public void doSearch() {
-		if (selectedManufacturer != null) {
-			engCodeList = tofEngineService.findEngineCodes(selectedManufacturer, selectedModelList, selectedFuelList);
-			wpartList = wpartService.findAllByTofEngineEngCodeIn(engCodeList);
-		} else {
-			wpartList = wpartService.findAll();
-		}
-		reload();
-	}
-	
 	/**
 	 * Loads designations
 	 */
@@ -74,57 +49,13 @@ public class EngineListBean implements Serializable {
 		i18nService.loadWPartListDesignations(wpartList, session.getCountryId(), session.getLocaleId());
 	}
 
-	public List<SelectItem> getAvailableManufacturerList() {
-		return session.getAvailableManufacturers();
-	}
-
-	public List<SelectItem> getAvailableModelList() {
-		if (selectedManufacturer != null) {
-			short mfaId = selectedManufacturer;
-			return session.getAvailableModels(mfaId);
-		} else {
-			return new ArrayList<SelectItem>();
-		}
-	}
-	
-	public List<SelectItem> getAvailableFuelList() {
-		return session.getAvailableFuels();
-	}
-
-	public Short getSelectedManufacturer() {
-		return selectedManufacturer;
-	}
-
-	public void setSelectedManufacturer(Short selectedManufacturer) {
-		this.selectedManufacturer = selectedManufacturer;
-	}
-
-	public List<Integer> getSelectedModelList() {
-		return selectedModelList;
-	}
-
-	public void setSelectedModelList(List<Integer> selectedModelList) {
-		this.selectedModelList = selectedModelList;
-	}
-
-	public List<Integer> getSelectedFuelList() {
-		return selectedFuelList;
-	}
-
-	public void setSelectedFuelList(List<Integer> selectedFuelList) {
-		this.selectedFuelList = selectedFuelList;
-	}
-
 	public List<WPart> getWpartList() {
 		return wpartList;
 	}
-	
-	public void settofEngineCodeFilter(String tofEngineCodeFilter) {
-        this.tofEngineCodeFilter = tofEngineCodeFilter;
-    }
 
-    public String gettofEngineCodeFilter() {
-        return tofEngineCodeFilter;
-    }
+	public void setWpartList(List<WPart> wpartList) {
+		this.wpartList = wpartList;
+	}
+
 
 }
