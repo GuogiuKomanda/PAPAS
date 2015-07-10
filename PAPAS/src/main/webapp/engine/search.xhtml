@@ -66,11 +66,11 @@
 	<a4j:commandButton value="Search" render="resultsTable" execute="@form"
 		action="#{engineSearchBean.doSearch}" />
 
-	<rich:extendedDataTable value="#{engineListBean.wpartList}" var="wp"
-		selection="#{engineListBean.selection}" selectionMode="single"
+	<rich:extendedDataTable value="#{engineSearchBean.wpartList}" var="wp"
+		selection="#{engineSearchBean.selection}" selectionMode="single"
 		id="resultsTable" rows="30">
 		<a4j:ajax execute="@form" event="selectionchange"
-			listener="#{engineListBean.selectionListener}" render=":res"></a4j:ajax>
+			listener="#{engineSearchBean.selectionListener}" render=":res"></a4j:ajax>
 
 		<f:facet name="noData">
 	    	Nothing found
@@ -169,8 +169,8 @@
 <h:messages />
 
 <a4j:outputPanel id="res">
-	<rich:panel header="Selected Rows:"	rendered="#{not empty engineListBean.selectionItems}">
-		<rich:list type="unordered" value="#{engineListBean.selectionItems}" var="sel">
+	<rich:panel header="Selected Rows:"	rendered="#{not empty engineSearchBean.selectionItems}">
+		<rich:list type="unordered" value="#{engineSearchBean.selectionItems}" var="sel">
 			<h:outputText value="#{sel.year}" />
 		</rich:list>
 	</rich:panel>

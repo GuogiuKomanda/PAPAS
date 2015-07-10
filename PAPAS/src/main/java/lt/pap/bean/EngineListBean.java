@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.model.SelectItem;
 
 import lt.pap.model.WPart;
 import lt.pap.service.I18nService;
-import lt.pap.service.TofEngineService;
 import lt.pap.service.WPartService;
 
 import org.springframework.beans.factory.annotation.Autowired;
